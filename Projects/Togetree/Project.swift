@@ -1,6 +1,6 @@
 import ProjectDescription
 
-let project = Project(
+private let project = Project(
     name: "Togetree",
     targets: [
         .target(
@@ -21,8 +21,8 @@ let project = Project(
                     ],
                 ]
             ),
-            sources: ["Togetree/Sources/**"],
-            resources: ["Togetree/Resources/**"],
+            sources: ["Sources/**"],
+            resources: ["Resources/**"],
             dependencies: []
         ),
         .target(
@@ -31,7 +31,7 @@ let project = Project(
             product: .unitTests,
             bundleId: "dev.sijun.TogetreeTests",
             infoPlist: .default,
-            sources: ["Togetree/Tests/**"],
+            sources: ["Tests/**"],
             resources: [],
             dependencies: [.target(name: "Togetree")]
         ),
