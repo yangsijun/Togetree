@@ -8,11 +8,19 @@
 import SwiftUI
 
 struct MainView: View {
+    var userList: [User] = []
+    var goalList: [Goal] = []
+    
     var body: some View {
         NavigationStack {
             VStack {
-                // TODO: Profile List
+                HorizontalProfileListView(userList: userList)
                 // TODO: Goal List
+                List {
+                    Text("Goal List")
+                    Text("Goal List")
+                    Text("Goal List")
+                }
             }
             .navigationTitle(Text("Togetree"))
             .navigationBarTitleDisplayMode(.large)
@@ -33,6 +41,18 @@ struct MainView: View {
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView()
+        MainView(
+            userList: [
+                User(name: "Air", profileImageUrl: "https://picsum.photos/200/300"),
+                User(name: "Air", profileImageUrl: "https://picsum.photos/200/300"),
+                User(name: "Air", profileImageUrl: "https://picsum.photos/200/300"),
+                User(name: "Air", profileImageUrl: "https://picsum.photos/200/300"),
+                User(name: "Air", profileImageUrl: "https://picsum.photos/200/300"),
+                User(name: "Air", profileImageUrl: "https://picsum.photos/200/300"),
+                User(name: "Air", profileImageUrl: "https://picsum.photos/200/300"),
+                User(name: "Air", profileImageUrl: "https://picsum.photos/200/300"),
+                User(name: "Air", profileImageUrl: "https://picsum.photos/200/300"),
+            ]
+        )
     }
 }
