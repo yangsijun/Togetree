@@ -23,7 +23,7 @@ public class Goal {
         description: String? = nil,
         createdAt: Date = Date(),
         updatedAt: Date = Date(),
-        goalType: GoalType,
+        goalType: GoalType = .singleGoal,
         startDate: Date,
         endDate: Date
     ) {
@@ -38,7 +38,15 @@ public class Goal {
     }
 }
 
-public class SingleGoal: Goal {
+public enum GoalType: String, Codable {
+    case singleGoal
+    case subGoals
+    case progress
+}
+
+
+
+public class SingleGoalGoal: Goal {
     public var completed: Bool = false
     
     init(
@@ -57,9 +65,14 @@ public class SingleGoal: Goal {
     }
 }
 
+public struct SubGoal: Identifiable {
+    public var id: UUID = UUID()
+    public var title: String
+    public var completed: Bool = false
+}
+
 public class SubGoalsGoal: Goal {
-    public var subGoals: [Goal]
-    public var completedSubGoalCount: Int
+    public var subGoals: [SubGoal]
     
     init(
         id: UUID = UUID(),
@@ -70,11 +83,9 @@ public class SubGoalsGoal: Goal {
         goalType: GoalType,
         startDate: Date,
         endDate: Date,
-        subGoals: [Goal],
-        completedSubGoalCount: Int
+        subGoals: [SubGoal]
     ) {
         self.subGoals = subGoals
-        self.completedSubGoalCount = completedSubGoalCount
         super.init(id: id, title: title, description: description, createdAt: createdAt, updatedAt: updatedAt, goalType: goalType, startDate: startDate, endDate: endDate)
     }
 }
@@ -99,10 +110,4 @@ public class ProgressGoal: Goal {
         self.endProgress = endProgress
         super.init(id: id, title: title, description: description, createdAt: createdAt, updatedAt: updatedAt, goalType: goalType, startDate: startDate, endDate: endDate)
     }
-}
-
-public enum GoalType: String, Codable {
-    case singleGoal
-    case subGoals
-    case progress
 }
