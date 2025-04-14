@@ -9,7 +9,25 @@ import SwiftUI
 
 struct MainView: View {
     var body: some View {
-        Text("Hello, World!")
+        NavigationStack {
+            VStack {
+                // TODO: Profile List
+                // TODO: Goal List
+            }
+            .navigationTitle(Text("Togetree"))
+            .navigationBarTitleDisplayMode(.large)
+            .toolbar {
+                ToolbarItemGroup {
+                    Button(action: {
+                        // TODO: New Goal
+                    }) {
+                        Image(systemName: "plus")
+                    }
+                }
+            }
+            // TODO: Implement Search feature
+            .searchable(text: .constant(""))
+        }
     }
 }
 
