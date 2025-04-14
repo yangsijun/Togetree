@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class Goal {
+public class Goal: Identifiable {
     public var id: UUID
     public var title: String
     public var description: String?
@@ -16,6 +16,7 @@ public class Goal {
     public var goalType: GoalType
     public var startDate: Date
     public var endDate: Date
+    public var isPublic: Bool
     
     init(
         id: UUID = UUID(),
@@ -25,7 +26,8 @@ public class Goal {
         updatedAt: Date = Date(),
         goalType: GoalType = .singleGoal,
         startDate: Date,
-        endDate: Date
+        endDate: Date,
+        isPublic: Bool = true
     ) {
         self.id = id
         self.title = title
@@ -35,6 +37,7 @@ public class Goal {
         self.goalType = goalType
         self.startDate = startDate
         self.endDate = endDate
+        self.isPublic = isPublic
     }
 }
 
@@ -47,6 +50,7 @@ public enum GoalType: String, Codable {
 
 
 public class SingleGoalGoal: Goal {
+    public var subGoals: [SubGoal] = []
     public var completed: Bool = false
     
     init(
@@ -55,13 +59,15 @@ public class SingleGoalGoal: Goal {
         description: String? = nil,
         createdAt: Date = Date(),
         updatedAt: Date = Date(),
-        goalType: GoalType,
+        goalType: GoalType = .singleGoal,
         startDate: Date,
         endDate: Date,
+        isPublic: Bool = true,
         completed: Bool = false
     ) {
         self.completed = completed
-        super.init(id: id, title: title, description: description, createdAt: createdAt, updatedAt: updatedAt, goalType: goalType, startDate: startDate, endDate: endDate)
+        self.subGoals = [SubGoal(title: title, completed: completed)]
+        super.init(id: id, title: title, description: description, createdAt: createdAt, updatedAt: updatedAt, goalType: goalType, startDate: startDate, endDate: endDate, isPublic: isPublic)
     }
 }
 
@@ -80,13 +86,14 @@ public class SubGoalsGoal: Goal {
         description: String? = nil,
         createdAt: Date = Date(),
         updatedAt: Date = Date(),
-        goalType: GoalType,
+        goalType: GoalType = .subGoals,
         startDate: Date,
         endDate: Date,
+        isPublic: Bool = true,
         subGoals: [SubGoal]
     ) {
         self.subGoals = subGoals
-        super.init(id: id, title: title, description: description, createdAt: createdAt, updatedAt: updatedAt, goalType: goalType, startDate: startDate, endDate: endDate)
+        super.init(id: id, title: title, description: description, createdAt: createdAt, updatedAt: updatedAt, goalType: goalType, startDate: startDate, endDate: endDate, isPublic: isPublic)
     }
 }
 
@@ -100,14 +107,15 @@ public class ProgressGoal: Goal {
         description: String? = nil,
         createdAt: Date = Date(),
         updatedAt: Date = Date(),
-        goalType: GoalType,
+        goalType: GoalType = .progress,
         startDate: Date,
         endDate: Date,
+        isPublic: Bool = true,
         currentProgress: Int,
         endProgress: Int
     ) {
         self.currentProgress = currentProgress
         self.endProgress = endProgress
-        super.init(id: id, title: title, description: description, createdAt: createdAt, updatedAt: updatedAt, goalType: goalType, startDate: startDate, endDate: endDate)
+        super.init(id: id, title: title, description: description, createdAt: createdAt, updatedAt: updatedAt, goalType: goalType, startDate: startDate, endDate: endDate, isPublic: isPublic)
     }
 }
