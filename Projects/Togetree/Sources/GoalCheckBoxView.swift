@@ -23,11 +23,16 @@ public struct GoalCheckBoxView: View {
                         .frame(width: 16, height: 16)
                 }
             }
-            Text(subgoal.title)
+            Group {
+                if subgoal.completed {
+                    Text(subgoal.title)
+                        .foregroundStyle(Color(uiColor: .secondaryLabel))
+                        .strikethrough(true, color: Color(uiColor: .secondaryLabel))
+                } else {
+                    Text(subgoal.title)
+                }
+            }
             Spacer()
-        }
-        .onTapGesture {
-            // TODO: Implement checkbox feature
         }
         .padding(8)
         .background(
