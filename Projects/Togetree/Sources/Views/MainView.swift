@@ -67,7 +67,6 @@ struct MainView: View {
                 GoalListView(goals: $goalList)
             }
             .background(Color("SecondaryBackground"))
-            .scrollContentBackground(.hidden)
             .navigationTitle(Text("Togetree"))
             .navigationBarTitleDisplayMode(.large)
             .toolbar {
