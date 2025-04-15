@@ -98,6 +98,7 @@ public class SubGoalsGoal: Goal {
 public class ProgressGoal: Goal {
     public var currentProgress: Int
     public var endProgress: Int
+    public var goalLabel: String?
     
     init(
         id: UUID = UUID(),
@@ -110,10 +111,12 @@ public class ProgressGoal: Goal {
         endDate: Date,
         isPublic: Bool = true,
         currentProgress: Int,
-        endProgress: Int
+        endProgress: Int,
+        goalLabel: String? = nil
     ) {
         self.currentProgress = currentProgress
         self.endProgress = endProgress
+        self.goalLabel = goalLabel
         super.init(id: id, title: title, description: description, createdAt: createdAt, updatedAt: updatedAt, goalType: goalType, startDate: startDate, endDate: endDate, isPublic: isPublic)
     }
 }
