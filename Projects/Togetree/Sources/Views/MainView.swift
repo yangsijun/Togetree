@@ -51,10 +51,13 @@ struct MainView: View {
     
     var body: some View {
         NavigationStack {
-            VStack {
+            ScrollView {
                 HorizontalProfileListView(userList: userList)
+                Divider()
                 GoalListView(goals: $goalList)
             }
+            .background(Color("SecondaryBackground"))
+            .scrollContentBackground(.hidden)
             .navigationTitle(Text("Togetree"))
             .navigationBarTitleDisplayMode(.large)
             .toolbar {
@@ -87,6 +90,46 @@ struct MainView_Previews: PreviewProvider {
                 User(name: "Air", profileImageUrl: "https://picsum.photos/200/300"),
             ],
             goalList: [
+                SingleGoalGoal(
+                    title: "앱 배포하기",
+                    description: "dfdsdfsdf",
+                    createdAt: Date(),
+                    updatedAt: Date(),
+                    startDate: Calendar.current.date(from: DateComponents(year: 2025, month: 4, day: 1))!,
+                    endDate: Calendar.current.date(from: DateComponents(year: 2025, month: 4, day: 30))!,
+                    isPublic: false,
+                    isCompleted: false
+                ),
+                SingleGoalGoal(
+                    title: "앱 배포하기",
+                    description: "dfdsdfsdf",
+                    createdAt: Date(),
+                    updatedAt: Date(),
+                    startDate: Calendar.current.date(from: DateComponents(year: 2025, month: 4, day: 1))!,
+                    endDate: Calendar.current.date(from: DateComponents(year: 2025, month: 4, day: 30))!,
+                    isPublic: false,
+                    isCompleted: false
+                ),
+                SingleGoalGoal(
+                    title: "앱 배포하기",
+                    description: "dfdsdfsdf",
+                    createdAt: Date(),
+                    updatedAt: Date(),
+                    startDate: Calendar.current.date(from: DateComponents(year: 2025, month: 4, day: 1))!,
+                    endDate: Calendar.current.date(from: DateComponents(year: 2025, month: 4, day: 30))!,
+                    isPublic: false,
+                    isCompleted: false
+                ),
+                SingleGoalGoal(
+                    title: "앱 배포하기",
+                    description: "dfdsdfsdf",
+                    createdAt: Date(),
+                    updatedAt: Date(),
+                    startDate: Calendar.current.date(from: DateComponents(year: 2025, month: 4, day: 1))!,
+                    endDate: Calendar.current.date(from: DateComponents(year: 2025, month: 4, day: 30))!,
+                    isPublic: false,
+                    isCompleted: false
+                ),
                 SingleGoalGoal(
                     title: "앱 배포하기",
                     description: "dfdsdfsdf",

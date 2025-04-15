@@ -21,7 +21,7 @@ struct HorizontalProfileListView: View {
                 }) {
                     Image(systemName: "chevron.forward.circle")
                 }
-                .padding(.leading, 8)
+                .padding(.horizontal, 8)
             }
             .padding(.vertical, 10)
             .padding(.horizontal, 20)

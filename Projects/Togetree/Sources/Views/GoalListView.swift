@@ -11,7 +11,7 @@ struct GoalListView: View {
     @Binding var goals: [Goal]
     
     var body: some View {
-        List {
+        VStack(spacing: 18) {
             ForEach(goals.indices, id: \.self) { index in
                 switch goals[index].goalType {
                 case .singleGoal:
@@ -31,11 +31,8 @@ struct GoalListView: View {
                     Text("Progress")
                 }
             }
-            .listRowBackground(Color.clear)
         }
-        .listStyle(.plain)
-        .background(Color("SecondaryBackground"))
-        .scrollContentBackground(.hidden)
+        .padding(20)
     }
 }
 
