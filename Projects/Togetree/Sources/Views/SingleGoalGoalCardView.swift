@@ -15,25 +15,7 @@ public struct SingleGoalGoalCardView: View {
             SingleGoalGoalDetailView(goal: $goal)
         } label: {
             VStack {
-                HStack(alignment: .top) {
-                    VStack(alignment: .leading) {
-                        Text(goal.title)
-                            .font(.headline)
-                        Text(goal.description ?? "")
-                            .font(.caption)
-                            .foregroundStyle(Color(uiColor: .secondaryLabel))
-                    }
-                    Spacer()
-                    Group {
-                        if goal.isPublic {
-                            Image(systemName: "globe")
-                        } else {
-                            Image(systemName: "lock")
-                        }
-                    }
-                    .foregroundStyle(Color(uiColor: .secondaryLabel))
-                    .frame(width: 20, height: 20)
-                }
+                GoalCardTextView(title: goal.title, description: goal.description, isPublic: goal.isPublic)
                 GoalCheckBoxView(text: $goal.title, isCompleted: $goal.isCompleted)
             }
             .padding(20)
