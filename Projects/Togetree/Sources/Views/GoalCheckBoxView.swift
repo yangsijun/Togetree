@@ -12,34 +12,39 @@ public struct GoalCheckBoxView: View {
     @Binding var isCompleted: Bool
     
     public var body: some View {
-        HStack {
-            Group {
-                if isCompleted {
-                    RoundedRectangle(cornerRadius: 4)
-                        .fill(Color("AccentColor"))
-                        .frame(width: 16, height: 16)
-                } else {
-                    RoundedRectangle(cornerRadius: 4)
-                        .strokeBorder(Color("AccentColor"), lineWidth: 1)
-                        .frame(width: 16, height: 16)
+        Group {
+            HStack {
+                Group {
+                    if isCompleted {
+                        RoundedRectangle(cornerRadius: 4)
+                            .fill(Color("AccentColor"))
+                            .frame(width: 16, height: 16)
+                    } else {
+                        RoundedRectangle(cornerRadius: 4)
+                            .strokeBorder(Color("AccentColor"), lineWidth: 1)
+                            .frame(width: 16, height: 16)
+                    }
                 }
-            }
-            Group {
-                if isCompleted {
-                    Text(text)
-                        .foregroundStyle(Color(uiColor: .secondaryLabel))
-                        .strikethrough(true, color: Color(uiColor: .secondaryLabel))
-                } else {
-                    Text(text)
+                Group {
+                    if isCompleted {
+                        Text(text)
+                            .foregroundStyle(Color(uiColor: .secondaryLabel))
+                            .strikethrough(true, color: Color(uiColor: .secondaryLabel))
+                    } else {
+                        Text(text)
+                    }
                 }
+                Spacer()
             }
-            Spacer()
+            .padding(8)
+            .background(
+                RoundedRectangle(cornerRadius: 8)
+                    .fill(Color("TertiaryFill"))
+            )
         }
-        .padding(8)
-        .background(
-            RoundedRectangle(cornerRadius: 8)
-                .fill(Color("TertiaryFill"))
-        )
+        .onTapGesture {
+            isCompleted.toggle()
+        }
     }
 }
 
