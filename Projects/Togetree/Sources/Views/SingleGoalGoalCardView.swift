@@ -32,7 +32,7 @@ public struct SingleGoalGoalCardView: View {
                 .foregroundStyle(Color(uiColor: .secondaryLabel))
                 .frame(width: 20, height: 20)
             }
-            GoalCheckBoxView(subgoal: $goal.subGoals[0])
+            GoalCheckBoxView(text: $goal.title, isCompleted: $goal.isCompleted)
         }
         .padding(20)
         .background(

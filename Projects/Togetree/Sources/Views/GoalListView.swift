@@ -49,7 +49,7 @@ struct GoalListView_Previews: PreviewProvider {
             startDate: Calendar.current.date(from: DateComponents(year: 2025, month: 4, day: 1))!,
             endDate: Calendar.current.date(from: DateComponents(year: 2025, month: 4, day: 30))!,
             isPublic: false,
-            completed: false
+            isCompleted: false
         ),
         SubGoalsGoal(
             title: "챌린지 2",
@@ -60,11 +60,11 @@ struct GoalListView_Previews: PreviewProvider {
             endDate: Calendar.current.date(from: DateComponents(year: 2025, month: 4, day: 25))!,
             isPublic: true,
             subGoals: [
-                SubGoal(title: "Solution Concept 선택하기", completed: true),
-                SubGoal(title: "App Statement 만들기", completed: true),
-                SubGoal(title: "Feature List 만들기", completed: true),
-                SubGoal(title: "Lofi 그리기", completed: true),
-                SubGoal(title: "Hifi 그리기", completed: false),
+                SubGoal(title: "Solution Concept 선택하기", isCompleted: true),
+                SubGoal(title: "App Statement 만들기", isCompleted: true),
+                SubGoal(title: "Feature List 만들기", isCompleted: true),
+                SubGoal(title: "Lofi 그리기", isCompleted: true),
+                SubGoal(title: "Hifi 그리기", isCompleted: false),
             ]
         ),
         ProgressGoal(

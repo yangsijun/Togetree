@@ -50,8 +50,7 @@ public enum GoalType: String, Codable {
 
 
 public class SingleGoalGoal: Goal {
-    public var subGoals: [SubGoal] = []
-    public var completed: Bool = false
+    public var isCompleted: Bool = false
     
     init(
         id: UUID = UUID(),
@@ -63,10 +62,9 @@ public class SingleGoalGoal: Goal {
         startDate: Date,
         endDate: Date,
         isPublic: Bool = true,
-        completed: Bool = false
+        isCompleted: Bool = false
     ) {
-        self.completed = completed
-        self.subGoals = [SubGoal(title: title, completed: completed)]
+        self.isCompleted = isCompleted
         super.init(id: id, title: title, description: description, createdAt: createdAt, updatedAt: updatedAt, goalType: goalType, startDate: startDate, endDate: endDate, isPublic: isPublic)
     }
 }
@@ -74,7 +72,7 @@ public class SingleGoalGoal: Goal {
 public struct SubGoal: Identifiable {
     public var id: UUID = UUID()
     public var title: String
-    public var completed: Bool = false
+    public var isCompleted: Bool = false
 }
 
 public class SubGoalsGoal: Goal {
