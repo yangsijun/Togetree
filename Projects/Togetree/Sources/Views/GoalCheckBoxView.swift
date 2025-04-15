@@ -8,7 +8,7 @@
 import SwiftUI
 
 public struct GoalCheckBoxView: View {
-    @Binding var text: String
+    var text: String
     @Binding var isCompleted: Bool
     
     public var body: some View {
@@ -60,8 +60,8 @@ struct GoalCheckBoxView_Previews: PreviewProvider {
     
     static var previews: some View {
         VStack {
-            GoalCheckBoxView(text: $subgoal.title, isCompleted: $subgoal.isCompleted)
-            GoalCheckBoxView(text: $subgoal_1.title, isCompleted: $subgoal_1.isCompleted)
+            GoalCheckBoxView(text: subgoal.title, isCompleted: $subgoal.isCompleted)
+            GoalCheckBoxView(text: subgoal_1.title, isCompleted: $subgoal_1.isCompleted)
         }
     }
 }

@@ -9,6 +9,7 @@ import SwiftUI
 
 public struct SubGoalsGoalCardView: View {
     @Binding var goal: SubGoalsGoal
+    @State var expanded: Bool = false
     
     public var body: some View {
         NavigationLink {
@@ -18,11 +19,32 @@ public struct SubGoalsGoalCardView: View {
                 GoalCardTextView(title: goal.title, description: goal.description, isPublic: goal.isPublic)
                 GoalProgressBarView(currentProgress: goal.subGoals.filter(\.isCompleted).count, endProgress: goal.subGoals.count)
                 Group {
-                    ForEach($goal.subGoals) { subGoal in
-                        GoalCheckBoxView(text: subGoal.title, isCompleted: subGoal.isCompleted)
+                    if expanded {
+                        ForEach($goal.subGoals) { subGoal in
+                            GoalCheckBoxView(text: subGoal.title.wrappedValue, isCompleted: subGoal.isCompleted)
+                        }
+                    } else {
+                        if let index = goal.subGoals.firstIndex(where: { !$0.isCompleted }) {
+                            GoalCheckBoxView(
+                                text: goal.subGoals[index].title,
+                                isCompleted: $goal.subGoals[index].isCompleted
+                            )
+                        }
                     }
                 }
                 .padding(.top, 4)
+                Button(action: {
+                    expanded.toggle()
+                }) {
+                    HStack(spacing: 4) {
+                        Image(systemName: expanded ? "chevron.up" : "chevron.down")
+                        Text(expanded ? "Show Less" : "Show More")
+                            .font(.caption)
+                    }
+                    .foregroundStyle(.secondary)
+                    .padding(.top, 4)
+                }
+                .buttonStyle(.plain)
             }
             .padding(20)
             .background(

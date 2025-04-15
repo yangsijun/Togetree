@@ -16,7 +16,7 @@ public struct SingleGoalGoalCardView: View {
         } label: {
             VStack {
                 GoalCardTextView(title: goal.title, description: goal.description, isPublic: goal.isPublic)
-                GoalCheckBoxView(text: $goal.title, isCompleted: $goal.isCompleted)
+                GoalCheckBoxView(text: goal.title, isCompleted: $goal.isCompleted)
             }
             .padding(20)
             .background(
