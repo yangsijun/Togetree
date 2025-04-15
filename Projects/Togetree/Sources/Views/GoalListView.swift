@@ -24,8 +24,14 @@ struct GoalListView: View {
                         )
                     }
                 case .subGoals:
-                    // TODO: Implement SubGoalsGoalCardView
-                    Text("SubGoals")
+                    if let _ = goals[index] as? SubGoalsGoal {
+                        SubGoalsGoalCardView(
+                            goal: Binding<SubGoalsGoal>(
+                                get: { self.goals[index] as! SubGoalsGoal },
+                                set: { self.goals[index] = $0 }
+                            )
+                        )
+                    }
                 case .progress:
                     // TODO: Implement ProgressGoalCardView
                     Text("Progress")
@@ -73,7 +79,8 @@ struct GoalListView_Previews: PreviewProvider {
             endDate: Calendar.current.date(from: DateComponents(year: 2025, month: 4, day: 30))!,
             isPublic: true,
             currentProgress: 4,
-            endProgress: 10
+            endProgress: 10,
+            goalLabel: "번"
         )
     ]
     

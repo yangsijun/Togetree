@@ -120,36 +120,6 @@ struct MainView_Previews: PreviewProvider {
                     isPublic: false,
                     isCompleted: false
                 ),
-                SingleGoalGoal(
-                    title: "앱 배포하기",
-                    description: "dfdsdfsdf",
-                    createdAt: Date(),
-                    updatedAt: Date(),
-                    startDate: Calendar.current.date(from: DateComponents(year: 2025, month: 4, day: 1))!,
-                    endDate: Calendar.current.date(from: DateComponents(year: 2025, month: 4, day: 30))!,
-                    isPublic: false,
-                    isCompleted: false
-                ),
-                SingleGoalGoal(
-                    title: "앱 배포하기",
-                    description: "dfdsdfsdf",
-                    createdAt: Date(),
-                    updatedAt: Date(),
-                    startDate: Calendar.current.date(from: DateComponents(year: 2025, month: 4, day: 1))!,
-                    endDate: Calendar.current.date(from: DateComponents(year: 2025, month: 4, day: 30))!,
-                    isPublic: false,
-                    isCompleted: false
-                ),
-                SingleGoalGoal(
-                    title: "앱 배포하기",
-                    description: "dfdsdfsdf",
-                    createdAt: Date(),
-                    updatedAt: Date(),
-                    startDate: Calendar.current.date(from: DateComponents(year: 2025, month: 4, day: 1))!,
-                    endDate: Calendar.current.date(from: DateComponents(year: 2025, month: 4, day: 30))!,
-                    isPublic: false,
-                    isCompleted: false
-                ),
                 SubGoalsGoal(
                     title: "챌린지 2",
                     description: "챌린지2를 통해 배우고 성장하기",
@@ -175,7 +145,8 @@ struct MainView_Previews: PreviewProvider {
                     endDate: Calendar.current.date(from: DateComponents(year: 2025, month: 4, day: 30))!,
                     isPublic: true,
                     currentProgress: 4,
-                    endProgress: 10
+                    endProgress: 10,
+                    goalLabel: "번"
                 )
             ]
         )
