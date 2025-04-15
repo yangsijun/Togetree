@@ -33,8 +33,14 @@ struct GoalListView: View {
                         )
                     }
                 case .progress:
-                    // TODO: Implement ProgressGoalCardView
-                    Text("Progress")
+                    if let _ = goals[index] as? ProgressGoal {
+                        ProgressGoalCardView(
+                            goal: Binding<ProgressGoal>(
+                                get: { self.goals[index] as! ProgressGoal },
+                                set: { self.goals[index] = $0 }
+                            )
+                        )
+                    }
                 }
             }
         }
