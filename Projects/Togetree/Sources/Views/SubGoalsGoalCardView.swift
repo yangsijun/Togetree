@@ -33,18 +33,21 @@ public struct SubGoalsGoalCardView: View {
                     }
                 }
                 .padding(.top, 4)
-                Button(action: {
-                    expanded.toggle()
-                }) {
-                    HStack(spacing: 4) {
-                        Image(systemName: expanded ? "chevron.up" : "chevron.down")
-                        Text(expanded ? "Show Less" : "Show More")
-                            .font(.caption)
+                HStack {
+                    Spacer()
+                    Button(action: {
+                        expanded.toggle()
+                    }) {
+                        HStack(spacing: 4) {
+                            Image(systemName: expanded ? "chevron.up" : "chevron.down")
+                            Text(expanded ? "Show Less" : "Show More")
+                                .font(.caption)
+                        }
+                        .foregroundStyle(.secondary)
+                        .padding(.top, 8)
                     }
-                    .foregroundStyle(.secondary)
-                    .padding(.top, 4)
+                    .buttonStyle(.plain)
                 }
-                .buttonStyle(.plain)
             }
             .padding(20)
             .background(
