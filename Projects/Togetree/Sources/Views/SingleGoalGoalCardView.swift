@@ -20,8 +20,7 @@ public struct SingleGoalGoalCardView: View {
             }
             .padding(20)
             .background(
-                RoundedRectangle(cornerRadius: 10)
-                    .fill(Color("TertiaryBackground"))
+                GoalCardBackgroundView()
             )
         }
         .buttonStyle(.plain)
