@@ -78,6 +78,8 @@ struct GoalListView_Previews: PreviewProvider {
     ]
     
     static var previews: some View {
-        GoalListView(goals: $goals)
+        NavigationStack {
+            GoalListView(goals: $goals)
+        }
     }
 }

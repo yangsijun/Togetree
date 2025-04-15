@@ -8,7 +8,17 @@
 import SwiftUI
 
 struct MainView: View {
-    @State var userList: [User] = []
+    @State var userList: [User] = [
+        User(name: "Air", profileImageUrl: "https://picsum.photos/200/300"),
+        User(name: "Air", profileImageUrl: "https://picsum.photos/200/300"),
+        User(name: "Air", profileImageUrl: "https://picsum.photos/200/300"),
+        User(name: "Air", profileImageUrl: "https://picsum.photos/200/300"),
+        User(name: "Air", profileImageUrl: "https://picsum.photos/200/300"),
+        User(name: "Air", profileImageUrl: "https://picsum.photos/200/300"),
+        User(name: "Air", profileImageUrl: "https://picsum.photos/200/300"),
+        User(name: "Air", profileImageUrl: "https://picsum.photos/200/300"),
+        User(name: "Air", profileImageUrl: "https://picsum.photos/200/300"),
+    ]
     @State var goalList: [Goal] = [
         SingleGoalGoal(
             title: "앱 배포하기",

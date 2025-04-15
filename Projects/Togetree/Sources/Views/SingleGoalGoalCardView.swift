@@ -11,34 +11,38 @@ public struct SingleGoalGoalCardView: View {
     @Binding var goal: SingleGoalGoal
     
     public var body: some View {
-        // TODO: Implement NavigationLink
-        VStack {
-            HStack(alignment: .top) {
-                VStack(alignment: .leading) {
-                    Text(goal.title)
-                        .font(.headline)
-                    Text(goal.description ?? "")
-                        .font(.caption)
-                        .foregroundStyle(Color(uiColor: .secondaryLabel))
-                }
-                Spacer()
-                Group {
-                    if goal.isPublic {
-                        Image(systemName: "globe")
-                    } else {
-                        Image(systemName: "lock")
+        NavigationLink {
+            SingleGoalGoalDetailView(goal: $goal)
+        } label: {
+            VStack {
+                HStack(alignment: .top) {
+                    VStack(alignment: .leading) {
+                        Text(goal.title)
+                            .font(.headline)
+                        Text(goal.description ?? "")
+                            .font(.caption)
+                            .foregroundStyle(Color(uiColor: .secondaryLabel))
                     }
+                    Spacer()
+                    Group {
+                        if goal.isPublic {
+                            Image(systemName: "globe")
+                        } else {
+                            Image(systemName: "lock")
+                        }
+                    }
+                    .foregroundStyle(Color(uiColor: .secondaryLabel))
+                    .frame(width: 20, height: 20)
                 }
-                .foregroundStyle(Color(uiColor: .secondaryLabel))
-                .frame(width: 20, height: 20)
+                GoalCheckBoxView(text: $goal.title, isCompleted: $goal.isCompleted)
             }
-            GoalCheckBoxView(text: $goal.title, isCompleted: $goal.isCompleted)
+            .padding(20)
+            .background(
+                RoundedRectangle(cornerRadius: 10)
+                    .fill(Color("TertiaryBackground"))
+            )
         }
-        .padding(20)
-        .background(
-            RoundedRectangle(cornerRadius: 10)
-                .fill(Color("TertiaryBackground"))
-        )
+        .buttonStyle(.plain)
     }
 }
 
@@ -51,8 +55,10 @@ struct SingleGoalGoalCardView_Previews: PreviewProvider {
     )
     
     static var previews: some View {
-        SingleGoalGoalCardView(
-            goal: $goal
-        )
+        NavigationStack {
+            SingleGoalGoalCardView(
+                goal: $goal
+            )
+        }
     }
 }
