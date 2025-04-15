@@ -62,9 +62,11 @@ struct MainView: View {
     var body: some View {
         NavigationStack {
             ScrollView {
-                HorizontalProfileListView(userList: userList)
-                Divider()
-                GoalListView(goals: $goalList)
+                VStack(spacing: 0) {
+                    HorizontalProfileListView(userList: userList)
+                    Divider()
+                    GoalListView(goals: $goalList)
+                }
             }
             .background(Color("SecondaryBackground"))
             .navigationTitle(Text("Togetree"))
