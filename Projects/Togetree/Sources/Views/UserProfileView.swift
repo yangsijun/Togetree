@@ -10,7 +10,7 @@ import SwiftUI
 struct UserProfileView: View {
     var user: User
     var imageSize: Int
-    var usernameVisibility: Bool = true
+    var showUsername: Bool = true
     
     var body: some View {
         Group {
@@ -26,7 +26,11 @@ struct UserProfileView: View {
                 }
                 .frame(width: CGFloat(imageSize), height: CGFloat(imageSize))
                 .clipShape(Circle())
-                Text(user.name)
+                Group {
+                    if showUsername {
+                        Text(user.name)
+                    }
+                }
             }
         }
     }
@@ -34,9 +38,16 @@ struct UserProfileView: View {
 
 struct UserProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        UserProfileView(
-            user: .init(name: "Test User", profileImageUrl: "https://picsum.photos/200/300"),
-            imageSize: 100
-        )
+        VStack {
+            UserProfileView(
+                user: .init(name: "Test User", profileImageUrl: "https://picsum.photos/200/300"),
+                imageSize: 100
+            )
+            UserProfileView(
+                user: .init(name: "Test User", profileImageUrl: "https://picsum.photos/200/300"),
+                imageSize: 64,
+                showUsername: false
+            )
+        }
     }
 }
