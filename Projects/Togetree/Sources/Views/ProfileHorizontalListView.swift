@@ -7,13 +7,13 @@
 
 import SwiftUI
 
-struct HorizontalProfileListView: View {
+struct ProfileHorizontalListView: View {
     var userList: [User]
     
     var body: some View {
         ScrollView(.horizontal) {
             HStack(spacing: 8) {
-                ForEach(userList, id: \.id) { user in
+                ForEach(userList) { user in
                     UserProfileView(user: user, imageSize: 64)
                 }
                 Button(action: {
@@ -29,9 +29,9 @@ struct HorizontalProfileListView: View {
     }
 }
 
-struct HorizontalProfileListView_Previews: PreviewProvider {
+struct ProfileHorizontalListView_Previews: PreviewProvider {
     static var previews: some View {
-        HorizontalProfileListView(
+        ProfileHorizontalListView(
             userList: [
                 User(name: "Air", profileImageUrl: "https://picsum.photos/200/300"),
                 User(name: "Air", profileImageUrl: "https://picsum.photos/200/300"),

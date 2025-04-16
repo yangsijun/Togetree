@@ -63,7 +63,7 @@ struct MainView: View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 0) {
-                    HorizontalProfileListView(userList: userList)
+                    ProfileHorizontalListView(userList: userList)
                     Divider()
                     GoalListView(goals: $goalList)
                 }
@@ -84,6 +84,7 @@ struct MainView: View {
             .searchable(text: .constant(""))
             .tint(Color("PrimaryColor"))
         }
+        .tint(Color("PrimaryColor"))
     }
 }
 
