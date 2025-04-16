@@ -10,15 +10,21 @@ import SwiftUI
 public struct SubGoalsGoalCardView: View {
     @Binding var goal: SubGoalsGoal
     @State var expanded: Bool = false
+    var showTextView: Bool = true
+    var showExpandButton: Bool = true
     
     public var body: some View {
         NavigationLink {
             SubGoalsGoalDetailView(goal: $goal)
         } label: {
-            VStack(spacing: 8) {
-                GoalCardTextView(title: goal.title, description: goal.description, isPublic: goal.isPublic)
-                GoalProgressBarView(currentProgress: goal.subGoals.filter(\.isCompleted).count, endProgress: goal.subGoals.count)
+            VStack(spacing: 16) {
                 Group {
+                    if showTextView {
+                        GoalCardTextView(title: goal.title, description: goal.description, isPublic: goal.isPublic)
+                    }
+                }
+                GoalProgressBarView(currentProgress: goal.subGoals.filter(\.isCompleted).count, endProgress: goal.subGoals.count)
+                VStack(spacing: 10) {
                     if expanded {
                         ForEach($goal.subGoals) { subGoal in
                             GoalCheckBoxView(text: subGoal.title.wrappedValue, isCompleted: subGoal.isCompleted)
@@ -32,21 +38,23 @@ public struct SubGoalsGoalCardView: View {
                         }
                     }
                 }
-                .padding(.top, 4)
-                HStack {
-                    Spacer()
-                    Button(action: {
-                        expanded.toggle()
-                    }) {
-                        HStack(spacing: 4) {
-                            Image(systemName: expanded ? "chevron.up" : "chevron.down")
-                            Text(expanded ? "Show Less" : "Show More")
-                                .font(.caption)
+                Group {
+                    if showExpandButton {
+                        HStack {
+                            Spacer()
+                            Button(action: {
+                                expanded.toggle()
+                            }) {
+                                HStack(spacing: 4) {
+                                    Image(systemName: expanded ? "chevron.up" : "chevron.down")
+                                    Text(expanded ? "Show Less" : "Show More")
+                                        .font(.caption)
+                                }
+                                .foregroundStyle(.secondary)
+                            }
+                            .buttonStyle(.plain)
                         }
-                        .foregroundStyle(.secondary)
-                        .padding(.top, 8)
                     }
-                    .buttonStyle(.plain)
                 }
             }
             .padding(20)
@@ -78,9 +86,17 @@ struct SubGoalsGoalCardView_Previews: PreviewProvider {
     
     static var previews: some View {
         NavigationStack {
-            SubGoalsGoalCardView(
-                goal: $goal
-            )
+            VStack {
+                SubGoalsGoalCardView(
+                    goal: $goal
+                )
+                SubGoalsGoalCardView(
+                    goal: $goal,
+                    expanded: true,
+                    showTextView: false,
+                    showExpandButton: false
+                )
+            }
         }
     }
 }

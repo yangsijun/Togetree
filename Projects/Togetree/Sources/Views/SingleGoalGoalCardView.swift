@@ -9,13 +9,18 @@ import SwiftUI
 
 public struct SingleGoalGoalCardView: View {
     @Binding var goal: SingleGoalGoal
+    var showTextView: Bool = true
     
     public var body: some View {
         NavigationLink {
             SingleGoalGoalDetailView(goal: $goal)
         } label: {
-            VStack {
-                GoalCardTextView(title: goal.title, description: goal.description, isPublic: goal.isPublic)
+            VStack(spacing: 16) {
+                Group {
+                    if showTextView {
+                        GoalCardTextView(title: goal.title, description: goal.description, isPublic: goal.isPublic)
+                    }
+                }
                 GoalCheckBoxView(text: goal.title, isCompleted: $goal.isCompleted)
             }
             .padding(20)
@@ -37,9 +42,15 @@ struct SingleGoalGoalCardView_Previews: PreviewProvider {
     
     static var previews: some View {
         NavigationStack {
-            SingleGoalGoalCardView(
-                goal: $goal
-            )
+            VStack {
+                SingleGoalGoalCardView(
+                    goal: $goal
+                )
+                SingleGoalGoalCardView(
+                    goal: $goal,
+                    showTextView: false
+                )
+            }
         }
     }
 }
