@@ -15,10 +15,10 @@ public struct GoalProgressBarView: View {
     public var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             Text("\(currentProgress) / \(endProgress) \(goalLabel ?? "")")
+                .padding(.top, 10)
             ProgressView(value: Double(currentProgress) / Double(endProgress))
                 .tint(Color("AccentColor"))
         }
-        .padding(.top, 10)
     }
 }
 

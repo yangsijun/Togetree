@@ -16,13 +16,13 @@ public struct GoalProgressBarWithStepperView: View {
         VStack(alignment: .leading, spacing: 8) {
             HStack {
                 Text("\(currentProgress) / \(endProgress) \(goalLabel ?? "")")
+                    .padding(.top, 10)
                 Spacer()
                 Stepper(value: $currentProgress, in: 0...endProgress, step: 1) {}
             }
             ProgressView(value: Double(currentProgress) / Double(endProgress))
                 .tint(Color("AccentColor"))
         }
-        .padding(.top, 10)
     }
 }
 
