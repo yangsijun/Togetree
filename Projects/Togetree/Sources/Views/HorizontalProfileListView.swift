@@ -12,7 +12,7 @@ struct HorizontalProfileListView: View {
     
     var body: some View {
         ScrollView(.horizontal) {
-            HStack {
+            HStack(spacing: 8) {
                 ForEach(userList, id: \.id) { user in
                     UserProfileView(user: user, imageSize: 64)
                 }
@@ -21,7 +21,6 @@ struct HorizontalProfileListView: View {
                 }) {
                     Image(systemName: "chevron.forward.circle")
                 }
-                .padding(.horizontal, 8)
             }
             .padding(.vertical, 10)
             .padding(.horizontal, 20)
