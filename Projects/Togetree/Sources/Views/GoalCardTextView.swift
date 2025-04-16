@@ -29,8 +29,8 @@ public struct GoalCardTextView: View {
                     Image(systemName: "lock")
                 }
             }
+            .font(.subheadline)
             .foregroundStyle(Color(uiColor: .secondaryLabel))
-            .frame(width: 20, height: 20)
         }
     }
 }
