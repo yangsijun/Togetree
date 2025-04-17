@@ -14,7 +14,7 @@ public struct GoalTreesHorizontalListView: View {
     
     public var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            NavigationLink(destination: Text("Hello, World!")) {
+            NavigationLink(destination: GoalTreesView(userList: userList)) {
                 HStack {
                     Text(title)
                     Text(userList.count.description)
@@ -32,7 +32,7 @@ public struct GoalTreesHorizontalListView: View {
                         UserProfileView(user: user, imageSize: 32, showUsername: false)
                     }
                     Group {
-                        if userList.count < visibleProfileCount {
+                        if userList.count <= visibleProfileCount {
                             Spacer()
                         } else {
                             Text("+\(userList.count - visibleProfileCount)")
@@ -49,15 +49,14 @@ public struct GoalTreesHorizontalListView: View {
 struct GoalTreesHorizontalListView_Previews: PreviewProvider {
     static var title: String = "응원나무"
     @State static var userList: [User] = [
-        User(name: "Air", profileImageUrl: "https://picsum.photos/200/300"),
-        User(name: "Air", profileImageUrl: "https://picsum.photos/200/300"),
-        User(name: "Air", profileImageUrl: "https://picsum.photos/200/300"),
-        User(name: "Air", profileImageUrl: "https://picsum.photos/200/300"),
-        User(name: "Air", profileImageUrl: "https://picsum.photos/200/300"),
-        User(name: "Air", profileImageUrl: "https://picsum.photos/200/300"),
-        User(name: "Air", profileImageUrl: "https://picsum.photos/200/300"),
-        User(name: "Air", profileImageUrl: "https://picsum.photos/200/300"),
-        User(name: "Air", profileImageUrl: "https://picsum.photos/200/300"),
+        User(name: "Air", profileImageUrl: "https://picsum.photos/200/300", statusMessage: "Hello, World!"),
+        User(name: "Air", profileImageUrl: "https://picsum.photos/200/300", statusMessage: "Hello, World!"),
+        User(name: "Air", profileImageUrl: "https://picsum.photos/200/300", statusMessage: "Hello, World!"),
+        User(name: "Air", profileImageUrl: "https://picsum.photos/200/300", statusMessage: "Hello, World!"),
+        User(name: "Air", profileImageUrl: "https://picsum.photos/200/300", statusMessage: "Hello, World!"),
+        User(name: "Air", profileImageUrl: "https://picsum.photos/200/300", statusMessage: "Hello, World!"),
+        User(name: "Air", profileImageUrl: "https://picsum.photos/200/300", statusMessage: "Hello, World!"),
+        User(name: "Air", profileImageUrl: "https://picsum.photos/200/300", statusMessage: "Hello, World!"),
     ]
     
     static var previews: some View {
