@@ -10,5 +10,6 @@ import Foundation
 public struct User: Codable, Identifiable {
     public var id: UUID = UUID()
     public var name: String
-    public var profileImageUrl: String?
+    public var profileImageUrl: String? = nil
+    public var statusMessage: String? = nil
 }
