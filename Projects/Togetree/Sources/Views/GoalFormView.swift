@@ -10,7 +10,7 @@ import SwiftUI
 struct GoalFormView: View {
     @Binding var title: String
     @Binding var description: String
-    @Binding var subgoals: [String]
+    @Binding var subgoals: [SubGoal]
     @Binding var endGoal: String
     @Binding var progressLabel: String
     @Binding var startValue: String
@@ -43,7 +43,7 @@ struct GoalFormView: View {
 struct GoalFormView_Previews: PreviewProvider {
     @State static var title: String = ""
     @State static var description: String = ""
-    @State static var subgoals: [String] = []
+    @State static var subgoals: [SubGoal] = []
     @State static var endGoal: String = ""
     @State static var progressLabel: String = ""
     @State static var startValue: String = ""
@@ -77,6 +77,7 @@ struct GoalFormTitleDescriptionView: View {
         Section {
             TextField("Goal Title", text: $title)
                 .font(.title)
+                .foregroundStyle(Color("AccentColor"))
                 .bold()
                 .padding(.vertical, 16)
             TextField("Goal Description (Optional)", text: $description)
@@ -87,7 +88,7 @@ struct GoalFormTitleDescriptionView: View {
 
 struct GoalFormDetailView: View {
     @Binding var goalType: GoalType
-    @Binding var subgoals: [String]
+    @Binding var subgoals: [SubGoal]
     @State var newSubgoalText: String = ""
     @Binding var endGoal: String
     @Binding var progressLabel: String
@@ -99,8 +100,8 @@ struct GoalFormDetailView: View {
             EmptyView()
         case .subGoals:
             Section("Sub Goals") {
-                ForEach(0..<subgoals.count, id: \.self) { i in
-                    TextField("Sub Goal", text: $subgoals[i])
+                ForEach($subgoals) { subgoal in
+                    TextField("Sub Goal", text: subgoal.title)
                 }
                 .onDelete(
                     perform: { offsets in
@@ -110,7 +111,9 @@ struct GoalFormDetailView: View {
                 TextField("New Sub Goal", text: $newSubgoalText)
                     .onSubmit {
                         if !newSubgoalText.isEmpty {
-                            subgoals.append(newSubgoalText)
+                            subgoals.append(
+                                SubGoal(title: newSubgoalText)
+                            )
                             newSubgoalText = ""
                         }
                     }

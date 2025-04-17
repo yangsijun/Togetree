@@ -9,15 +9,15 @@ import SwiftUI
 
 struct MainView: View {
     @State var userList: [User] = [
-        User(name: "Air", profileImageUrl: "https://picsum.photos/200/300"),
-        User(name: "Air", profileImageUrl: "https://picsum.photos/200/300"),
-        User(name: "Air", profileImageUrl: "https://picsum.photos/200/300"),
-        User(name: "Air", profileImageUrl: "https://picsum.photos/200/300"),
-        User(name: "Air", profileImageUrl: "https://picsum.photos/200/300"),
-        User(name: "Air", profileImageUrl: "https://picsum.photos/200/300"),
-        User(name: "Air", profileImageUrl: "https://picsum.photos/200/300"),
-        User(name: "Air", profileImageUrl: "https://picsum.photos/200/300"),
-        User(name: "Air", profileImageUrl: "https://picsum.photos/200/300"),
+        User(name: "Air", profileImageUrl: "https://picsum.photos/200/300", statusMessage: "Hello, World!"),
+        User(name: "Air", profileImageUrl: "https://picsum.photos/200/300", statusMessage: "Hello, World!"),
+        User(name: "Air", profileImageUrl: "https://picsum.photos/200/300", statusMessage: "Hello, World!"),
+        User(name: "Air", profileImageUrl: "https://picsum.photos/200/300", statusMessage: "Hello, World!"),
+        User(name: "Air", profileImageUrl: "https://picsum.photos/200/300", statusMessage: "Hello, World!"),
+        User(name: "Air", profileImageUrl: "https://picsum.photos/200/300", statusMessage: "Hello, World!"),
+        User(name: "Air", profileImageUrl: "https://picsum.photos/200/300", statusMessage: "Hello, World!"),
+        User(name: "Air", profileImageUrl: "https://picsum.photos/200/300", statusMessage: "Hello, World!"),
+        User(name: "Air", profileImageUrl: "https://picsum.photos/200/300", statusMessage: "Hello, World!"),
     ]
     @State var goalList: [Goal] = [
         SingleGoalGoal(
@@ -81,7 +81,7 @@ struct MainView: View {
                     }
                     .sheet(isPresented: $showModal) {
                         NavigationStack {
-                            NewGoalView(showModal: $showModal)
+                            NewGoalView(goalList: $goalList, showModal: $showModal)
                         }
                     }
                 }
