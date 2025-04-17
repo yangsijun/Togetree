@@ -46,7 +46,7 @@ struct GoalDetailView: View {
             .padding(.top, 24)
             .padding(.bottom, 32)
         }
-        .background(Color("SecondaryBackground"))
+        .background(Color.secondaryBackground)
         .toolbar {
             ToolbarItemGroup {
                 Button(action: {
@@ -61,7 +61,7 @@ struct GoalDetailView: View {
                 }
             }
         }
-        .tint(Color("PrimaryColor"))
+        .tint(Color.tintColor)
     }
 }
     

@@ -26,7 +26,7 @@ struct GoalProgressBarView: View {
                 }
             }
             ProgressView(value: Double(currentProgress) / Double(endProgress))
-                .tint(Color("AccentColor"))
+                .tint(Color.accentColor)
         }
     }
 }

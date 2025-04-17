@@ -10,7 +10,7 @@ import SwiftUI
 struct GoalCardBackgroundView: View {
     var body: some View {
         RoundedRectangle(cornerRadius: 10)
-            .fill(Color("TertiaryBackground"))
+            .fill(Color.tertiaryBackground)
     }
 }
 

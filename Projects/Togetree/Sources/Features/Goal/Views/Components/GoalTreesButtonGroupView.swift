@@ -22,11 +22,11 @@ struct GoalTreesButtonGroupView: View {
                 .background(
                     isCheering
                         ? Capsule()
-                        .fill(Color("SecondaryAccentColor").opacity(0.15))
-                            .stroke(Color("SecondaryAccentColor"), lineWidth: 1)
+                        .fill(Color.secondaryAccentColor.opacity(0.15))
+                            .stroke(Color.secondaryAccentColor, lineWidth: 1)
                         : Capsule()
                             .fill(Color.clear)
-                            .stroke(Color("SecondaryAccentColor"), lineWidth: 1)
+                            .stroke(Color.secondaryAccentColor, lineWidth: 1)
                 )
             }
             Button(action: { isHelping.toggle() }) {
@@ -38,15 +38,15 @@ struct GoalTreesButtonGroupView: View {
                 .background(
                     isHelping
                         ? Capsule()
-                        .fill(Color("SecondaryAccentColor").opacity(0.15))
-                            .stroke(Color("SecondaryAccentColor"), lineWidth: 1)
+                        .fill(Color.secondaryAccentColor.opacity(0.15))
+                            .stroke(Color.secondaryAccentColor, lineWidth: 1)
                         : Capsule()
                             .fill(Color.clear)
-                            .stroke(Color("SecondaryAccentColor"), lineWidth: 1)
+                            .stroke(Color.secondaryAccentColor, lineWidth: 1)
                 )
             }
         }
-        .tint(Color("SecondaryAccentColor"))
+        .tint(Color.secondaryAccentColor)
         .frame(height: 40)
     }
 }

@@ -19,10 +19,10 @@ struct GoalTreesHorizontalListView: View {
                     Text(title)
                     Text(userList.count.description)
                         .font(.caption)
-                        .foregroundStyle(Color("SecondaryAccentColor"))
+                        .foregroundStyle(Color.secondaryAccentColor)
                     Image(systemName: "chevron.forward")
                         .font(.subheadline)
-                        .foregroundStyle(Color("SecondaryAccentColor"))
+                        .foregroundStyle(Color.secondaryAccentColor)
                 }
             }
             .buttonStyle(.plain)
@@ -37,7 +37,7 @@ struct GoalTreesHorizontalListView: View {
                         } else {
                             Text("+\(userList.count - visibleProfileCount)")
                                 .font(.caption)
-                                .foregroundStyle(Color("SecondaryAccentColor"))
+                                .foregroundStyle(Color.secondaryAccentColor)
                         }
                     }
                 }
@@ -66,5 +66,6 @@ struct GoalTreesHorizontalListView_Previews: PreviewProvider {
                 userList: $userList
             )
         }
+        .tint(Color.tintColor)
     }
 }

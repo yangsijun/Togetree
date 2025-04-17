@@ -25,7 +25,7 @@ struct GoalStartEndDateTextView: View {
             }
         }
         .font(.caption)
-        .foregroundStyle(.secondary)
+        .foregroundStyle(Color.secondaryLabel)
     }
 }
 

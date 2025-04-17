@@ -34,9 +34,9 @@ struct GoalFormView: View {
             GoalFormDatesView(startDate: $startDate, endDate: $endDate)
             GoalFormVisibilityView(isPublic: $isPublic)
         }
-        .tint(Color("PrimaryColor"))
+        .tint(Color.tintColor)
         .scrollContentBackground(.hidden)
-        .background(Color("SecondaryBackground"))
+        .background(Color.secondaryBackground)
     }
 }
 
@@ -77,7 +77,7 @@ struct GoalFormTitleDescriptionView: View {
         Section {
             TextField("Goal Title", text: $title)
                 .font(.title)
-                .foregroundStyle(Color("AccentColor"))
+                .foregroundStyle(Color.accentColor)
                 .bold()
                 .padding(.vertical, 16)
             TextField("Goal Description (Optional)", text: $description)
@@ -154,39 +154,39 @@ struct GoalFormGoalTypeView: View {
                 HStack {
                     Image(systemName: "checkmark.square")
                         .font(.largeTitle)
-                        .foregroundStyle(Color("PrimaryColor"))
+                        .foregroundStyle(Color.primary)
                     VStack(alignment: .leading) {
                         Text("Single Goal")
-                            .foregroundStyle(Color(.label))
+                            .foregroundStyle(Color.label)
                         Text("Goal has only one task")
                             .font(.caption)
-                            .foregroundColor(.secondary)
+                            .foregroundStyle(Color.secondaryLabel)
                     }
                 }
                 .tag(GoalType.singleGoal)
                 HStack {
                     Image(systemName: "list.bullet")
                         .font(.largeTitle)
-                        .foregroundStyle(Color("PrimaryColor"))
+                        .foregroundStyle(Color.primary)
                     VStack(alignment: .leading) {
                         Text("Sub Goals")
-                            .foregroundStyle(Color(.label))
+                            .foregroundStyle(Color.label)
                         Text("Goal with multiple subtasks")
                             .font(.caption)
-                            .foregroundColor(.secondary)
+                            .foregroundStyle(Color.secondaryLabel)
                     }
                 }
                 .tag(GoalType.subGoals)
                 HStack {
                     Image(systemName: "progress.indicator")
                         .font(.largeTitle)
-                        .foregroundStyle(Color("PrimaryColor"))
+                        .foregroundStyle(Color.primary)
                     VStack(alignment: .leading) {
                         Text("Progress")
-                            .foregroundStyle(Color(.label))
+                            .foregroundStyle(Color.label)
                         Text("Progressive goal")
                             .font(.caption)
-                            .foregroundColor(.secondary)
+                            .foregroundStyle(Color.secondaryLabel)
                     }
                 }
                 .tag(GoalType.progress)

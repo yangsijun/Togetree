@@ -15,12 +15,12 @@ struct GoalTitleCardTextView: View {
         VStack(spacing: 8) {
             Text(title)
                 .font(.headline)
-                .foregroundStyle(.white)
+                .foregroundStyle(Color.white)
             Group {
                 if description != nil {
                     Text(description ?? "")
                         .font(.caption)
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(Color.secondaryLabel)
                 }
             }
         }

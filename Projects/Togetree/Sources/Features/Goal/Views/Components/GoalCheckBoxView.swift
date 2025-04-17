@@ -17,19 +17,19 @@ struct GoalCheckBoxView: View {
                 Group {
                     if isCompleted {
                         RoundedRectangle(cornerRadius: 4)
-                            .fill(Color("AccentColor"))
+                            .fill(Color.accentColor)
                             .frame(width: 16, height: 16)
                     } else {
                         RoundedRectangle(cornerRadius: 4)
-                            .strokeBorder(Color("AccentColor"), lineWidth: 1)
+                            .strokeBorder(Color.accentColor, lineWidth: 1)
                             .frame(width: 16, height: 16)
                     }
                 }
                 Group {
                     if isCompleted {
                         Text(text)
-                            .foregroundStyle(Color(uiColor: .secondaryLabel))
-                            .strikethrough(true, color: Color(uiColor: .secondaryLabel))
+                            .foregroundStyle(Color.secondaryLabel)
+                            .strikethrough(true, color: Color.secondaryLabel)
                     } else {
                         Text(text)
                     }
@@ -39,7 +39,7 @@ struct GoalCheckBoxView: View {
             .padding(8)
             .background(
                 RoundedRectangle(cornerRadius: 8)
-                    .fill(Color("TertiaryFill"))
+                    .fill(Color.tertiaryFill)
             )
         }
         .onTapGesture {

@@ -66,6 +66,6 @@ struct GoalListView_Previews: PreviewProvider {
         NavigationStack {
             GoalListView(goals: $goals)
         }
-        .tint(Color("PrimaryColor"))
+        .tint(Color.tintColor)
     }
 }
