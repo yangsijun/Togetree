@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct GoalTreesView: View {
+    var title: String = ""
     var userList: [User] = []
     
     var body: some View {
@@ -17,7 +18,8 @@ struct GoalTreesView: View {
             }
         }
         .listStyle(.plain)
-        
+        .navigationTitle(title)
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 

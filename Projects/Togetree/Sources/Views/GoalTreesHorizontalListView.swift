@@ -14,7 +14,7 @@ public struct GoalTreesHorizontalListView: View {
     
     public var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            NavigationLink(destination: GoalTreesView(userList: userList)) {
+            NavigationLink(destination: GoalTreesView(title: title, userList: userList)) {
                 HStack {
                     Text(title)
                     Text(userList.count.description)

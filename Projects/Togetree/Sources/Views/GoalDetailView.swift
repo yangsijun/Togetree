@@ -11,11 +11,11 @@ struct GoalDetailView: View {
     @Binding var goal: Goal
     var isMyGoal: Bool = false
     @State var cheerTreesList: [User] = Array(
-        repeating: User(name: "Air", profileImageUrl: "https://picsum.photos/200/300"),
+        repeating: User(name: "Air", profileImageUrl: "https://picsum.photos/200/300", statusMessage: "Hello, World!"),
         count: 9
     )
     @State var helpTreesList: [User] = Array(
-        repeating: User(name: "Air", profileImageUrl: "https://picsum.photos/200/300"),
+        repeating: User(name: "Air", profileImageUrl: "https://picsum.photos/200/300", statusMessage: "Hello, World!"),
         count: 12
     )
     @State var isCheering: Bool = false
