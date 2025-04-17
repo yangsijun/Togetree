@@ -12,66 +12,8 @@ public struct GoalCardNavigationLinkView: View {
     var showTextView: Bool = true
     
     public var body: some View {
-        NavigationLink {
-            switch goal.goalType {
-            case .singleGoal:
-                if let _ = goal as? SingleGoalGoal {
-                    SingleGoalGoalDetailView(
-                        goal: Binding<SingleGoalGoal>(
-                            get: { self.goal as! SingleGoalGoal },
-                            set: { self.goal = $0 }
-                        )
-                    )
-                }
-            case .subGoals:
-                if let _ = goal as? SubGoalsGoal {
-                    SubGoalsGoalDetailView(
-                        goal: Binding<SubGoalsGoal>(
-                            get: { self.goal as! SubGoalsGoal },
-                            set: { self.goal = $0 }
-                        )
-                    )
-                }
-            case .progress:
-                if let _ = goal as? ProgressGoal {
-                    ProgressGoalDetailView(
-                        goal: Binding<ProgressGoal>(
-                            get: { self.goal as! ProgressGoal },
-                            set: { self.goal = $0 }
-                        )
-                    )
-                }
-            }
-        } label: {
-            switch goal.goalType {
-            case .singleGoal:
-                if let _ = goal as? SingleGoalGoal {
-                    SingleGoalGoalCardView(
-                        goal: Binding<SingleGoalGoal>(
-                            get: { self.goal as! SingleGoalGoal },
-                            set: { self.goal = $0 }
-                        )
-                    )
-                }
-            case .subGoals:
-                if let _ = goal as? SubGoalsGoal {
-                    SubGoalsGoalCardView(
-                        goal: Binding<SubGoalsGoal>(
-                            get: { self.goal as! SubGoalsGoal },
-                            set: { self.goal = $0 }
-                        )
-                    )
-                }
-            case .progress:
-                if let _ = goal as? ProgressGoal {
-                    ProgressGoalCardView(
-                        goal: Binding<ProgressGoal>(
-                            get: { self.goal as! ProgressGoal },
-                            set: { self.goal = $0 }
-                        )
-                    )
-                }
-            }
+        NavigationLink(destination: GoalDetailView(goal: $goal)) {
+            GoalCardView(goal: $goal)
         }
         .buttonStyle(.plain)
     }

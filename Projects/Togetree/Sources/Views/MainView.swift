@@ -82,7 +82,7 @@ struct MainView: View {
             }
             // TODO: Implement Search feature
             .searchable(text: .constant(""))
-            .tint(Color("PrimaryColor"))
+//            .tint(Color("PrimaryColor"))
         }
         .tint(Color("PrimaryColor"))
     }
