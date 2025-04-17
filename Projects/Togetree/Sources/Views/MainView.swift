@@ -58,6 +58,7 @@ struct MainView: View {
             endProgress: 10
         ),
     ]
+    @State var showModal: Bool = false
     
     var body: some View {
         NavigationStack {
@@ -74,9 +75,14 @@ struct MainView: View {
             .toolbar {
                 ToolbarItemGroup {
                     Button(action: {
-                        // TODO: New Goal
+                        showModal = true
                     }) {
                         Image(systemName: "plus")
+                    }
+                    .sheet(isPresented: $showModal) {
+                        NavigationStack {
+                            NewGoalView(showModal: $showModal)
+                        }
                     }
                 }
             }
