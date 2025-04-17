@@ -12,36 +12,8 @@ struct GoalListView: View {
     
     var body: some View {
         VStack(spacing: 18) {
-            ForEach(goals.indices, id: \.self) { index in
-                switch goals[index].goalType {
-                case .singleGoal:
-                    if let _ = goals[index] as? SingleGoalGoal {
-                        SingleGoalGoalCardView(
-                            goal: Binding<SingleGoalGoal>(
-                                get: { self.goals[index] as! SingleGoalGoal },
-                                set: { self.goals[index] = $0 }
-                            )
-                        )
-                    }
-                case .subGoals:
-                    if let _ = goals[index] as? SubGoalsGoal {
-                        SubGoalsGoalCardView(
-                            goal: Binding<SubGoalsGoal>(
-                                get: { self.goals[index] as! SubGoalsGoal },
-                                set: { self.goals[index] = $0 }
-                            )
-                        )
-                    }
-                case .progress:
-                    if let _ = goals[index] as? ProgressGoal {
-                        ProgressGoalCardView(
-                            goal: Binding<ProgressGoal>(
-                                get: { self.goals[index] as! ProgressGoal },
-                                set: { self.goals[index] = $0 }
-                            )
-                        )
-                    }
-                }
+            ForEach($goals) { goal in
+                GoalCardNavigationLinkView(goal: goal)
             }
         }
         .padding(20)
@@ -94,5 +66,6 @@ struct GoalListView_Previews: PreviewProvider {
         NavigationStack {
             GoalListView(goals: $goals)
         }
+        .tint(Color("PrimaryColor"))
     }
 }

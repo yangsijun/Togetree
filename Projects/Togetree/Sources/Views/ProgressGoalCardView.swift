@@ -12,27 +12,22 @@ public struct ProgressGoalCardView: View {
     var showTextView: Bool = true
     
     public var body: some View {
-        NavigationLink {
-            ProgressGoalDetailView(goal: $goal)
-        } label: {
-            VStack(spacing: 16) {
-                Group {
-                    if showTextView {
-                        GoalCardTextView(title: goal.title, description: goal.description, isPublic: goal.isPublic)
-                    }
+        VStack(spacing: 16) {
+            Group {
+                if showTextView {
+                    GoalCardTextView(title: goal.title, description: goal.description, isPublic: goal.isPublic)
                 }
-                GoalProgressBarWithStepperView(
-                    currentProgress: $goal.currentProgress,
-                    endProgress: goal.endProgress,
-                    goalLabel: goal.goalLabel
-                )
             }
-            .padding(20)
-            .background(
-                GoalCardBackgroundView()
+            GoalProgressBarWithStepperView(
+                currentProgress: $goal.currentProgress,
+                endProgress: goal.endProgress,
+                goalLabel: goal.goalLabel
             )
         }
-        .buttonStyle(.plain)
+        .padding(20)
+        .background(
+            GoalCardBackgroundView()
+        )
     }
 }
 
