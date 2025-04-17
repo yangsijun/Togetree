@@ -24,27 +24,21 @@ struct GoalDetailView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 24) {
-                GoalTitleCardTextView(title: goal.title, description: goal.description)
-                    .padding(.horizontal, 20)
-                    .padding(.vertical, 32)
-                    .frame(maxWidth: .infinity)
-                    .background(GoalTitleCardBackgroundView())
+                GoalTitleCardView(goal: goal)
+                GoalCardView(
+                    goal: $goal,
+                    showTextView: false,
+                    expanded: true,
+                    showExpandButton: false
+                )
+                GoalStartEndDateTextView(startDate: goal.startDate, endDate: goal.endDate)
+                Divider()
+                    .padding(.vertical, 24)
+                GoalTreesHorizontalListView(title: "응원나무", userList: $cheerTreesList)
+                GoalTreesHorizontalListView(title: "도움나무", userList: $helpTreesList)
                 Group {
-                    GoalCardView(
-                        goal: $goal,
-                        showTextView: false,
-                        expanded: true,
-                        showExpandButton: false
-                    )
-                    GoalStartEndDateTextView(startDate: goal.startDate, endDate: goal.endDate)
-                    Divider()
-                        .padding(.vertical, 24)
-                    GoalTreesHorizontalListView(title: "응원나무", userList: $cheerTreesList)
-                    GoalTreesHorizontalListView(title: "도움나무", userList: $helpTreesList)
-                    Group {
-                        if !isMyGoal {
-                            GoalTreesButtonGroupView(isCheering: $isCheering, isHelping: $isHelping)
-                        }
+                    if !isMyGoal {
+                        GoalTreesButtonGroupView(isCheering: $isCheering, isHelping: $isHelping)
                     }
                 }
             }
