@@ -7,10 +7,10 @@
 
 import SwiftUI
 
-public struct ProgressGoalCardContentView: View {
+struct ProgressGoalCardContentView: View {
     @Binding var goal: ProgressGoal
     
-    public var body: some View {
+    var body: some View {
         GoalProgressBarView(
             currentProgress: $goal.currentProgress,
             endProgress: goal.endProgress,

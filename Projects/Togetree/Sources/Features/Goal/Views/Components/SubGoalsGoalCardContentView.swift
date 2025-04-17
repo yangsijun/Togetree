@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-public struct SubGoalsGoalCardContentView: View {
+struct SubGoalsGoalCardContentView: View {
     @Binding var goal: SubGoalsGoal
     @State var expanded: Bool = false
     var showExpandButton: Bool = true
     
-    public var body: some View {
+    var body: some View {
         VStack(spacing: 16) {
             GoalProgressBarView(
                 currentProgress: .constant(goal.subGoals.filter(\.isCompleted).count),

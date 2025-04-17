@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-public struct GoalTreesButtonGroupView: View {
+struct GoalTreesButtonGroupView: View {
     @Binding var isCheering: Bool
     @Binding var isHelping: Bool
     
-    public var body: some View {
+    var body: some View {
         HStack {
             Button(action: { isCheering.toggle() }) {
                 HStack {

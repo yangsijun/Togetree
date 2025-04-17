@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-public struct GoalTreesHorizontalListView: View {
+struct GoalTreesHorizontalListView: View {
     var title: String
     @Binding var userList: [User]
     private let visibleProfileCount: Int = 8
     
-    public var body: some View {
+    var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             NavigationLink(destination: GoalTreesView(title: title, userList: userList)) {
                 HStack {

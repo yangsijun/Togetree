@@ -7,13 +7,13 @@
 
 import SwiftUI
 
-public struct GoalProgressBarView: View {
+struct GoalProgressBarView: View {
     @Binding var currentProgress: Int
     var endProgress: Int
     var goalLabel: String? = nil
     var withStepper: Bool = false
     
-    public var body: some View {
+    var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             HStack {
                 Text("\(currentProgress) / \(endProgress) \(goalLabel ?? "")")

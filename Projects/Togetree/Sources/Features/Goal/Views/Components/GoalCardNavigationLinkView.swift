@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-public struct GoalCardNavigationLinkView: View {
+struct GoalCardNavigationLinkView: View {
     @Binding var goal: Goal
     var showTextView: Bool = true
     
-    public var body: some View {
+    var body: some View {
         NavigationLink(destination: GoalDetailView(goal: $goal)) {
             GoalCardView(goal: $goal)
         }

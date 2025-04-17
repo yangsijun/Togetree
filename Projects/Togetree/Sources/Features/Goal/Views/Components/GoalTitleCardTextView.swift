@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-public struct GoalTitleCardTextView: View {
+struct GoalTitleCardTextView: View {
     var title: String
     var description: String?
     

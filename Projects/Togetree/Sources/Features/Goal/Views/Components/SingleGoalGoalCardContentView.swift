@@ -7,10 +7,10 @@
 
 import SwiftUI
 
-public struct SingleGoalGoalCardContentView: View {
+struct SingleGoalGoalCardContentView: View {
     @Binding var goal: SingleGoalGoal
     
-    public var body: some View {
+    var body: some View {
         GoalCheckBoxView(text: goal.title, isCompleted: $goal.isCompleted)
     }
 }

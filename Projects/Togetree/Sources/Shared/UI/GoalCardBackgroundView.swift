@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-public struct GoalCardBackgroundView: View {
-    public var body: some View {
+struct GoalCardBackgroundView: View {
+    var body: some View {
         RoundedRectangle(cornerRadius: 10)
             .fill(Color("TertiaryBackground"))
     }

@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-public struct GoalTitleCardBackgroundView: View {
-    public var body: some View {
+struct GoalTitleCardBackgroundView: View {
+    var body: some View {
         RoundedRectangle(cornerRadius: 10)
             .fill(Color("AccentColor"))
     }

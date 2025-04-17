@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-public struct GoalCardTextView: View {
+struct GoalCardTextView: View {
     var title: String
     var description: String?
     var isPublic: Bool
     
-    public var body: some View {
+    var body: some View {
         HStack(alignment: .top) {
             VStack(alignment: .leading) {
                 Text(title)

@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-public struct GoalCheckBoxView: View {
+struct GoalCheckBoxView: View {
     var text: String
     @Binding var isCompleted: Bool
     
-    public var body: some View {
+    var body: some View {
         Group {
             HStack {
                 Group {

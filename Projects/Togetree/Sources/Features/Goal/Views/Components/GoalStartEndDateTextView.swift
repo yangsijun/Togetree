@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-public struct GoalStartEndDateTextView: View {
+struct GoalStartEndDateTextView: View {
     var startDate: Date
     var endDate: Date
     
-    public var body: some View {
+    var body: some View {
         VStack {
             HStack {
                 Text("Start Date")

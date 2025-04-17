@@ -7,10 +7,10 @@
 
 import SwiftUI
 
-public struct GoalTitleCardView: View {
+struct GoalTitleCardView: View {
     var goal: Goal
     
-    public var body: some View {
+    var body: some View {
         GoalTitleCardTextView(title: goal.title, description: goal.description)
             .padding(.horizontal, 20)
             .padding(.vertical, 32)
