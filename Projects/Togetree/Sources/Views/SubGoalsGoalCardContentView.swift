@@ -14,7 +14,10 @@ public struct SubGoalsGoalCardContentView: View {
     
     public var body: some View {
         VStack(spacing: 16) {
-            GoalProgressBarView(currentProgress: goal.subGoals.filter(\.isCompleted).count, endProgress: goal.subGoals.count)
+            GoalProgressBarView(
+                currentProgress: .constant(goal.subGoals.filter(\.isCompleted).count),
+                endProgress: goal.subGoals.count
+            )
             VStack(spacing: 10) {
                 if expanded {
                     ForEach($goal.subGoals) { subGoal in

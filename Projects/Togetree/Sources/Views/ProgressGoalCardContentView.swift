@@ -11,10 +11,11 @@ public struct ProgressGoalCardContentView: View {
     @Binding var goal: ProgressGoal
     
     public var body: some View {
-        GoalProgressBarWithStepperView(
+        GoalProgressBarView(
             currentProgress: $goal.currentProgress,
             endProgress: goal.endProgress,
-            goalLabel: goal.goalLabel
+            goalLabel: goal.goalLabel,
+            withStepper: true
         )
     }
 }
