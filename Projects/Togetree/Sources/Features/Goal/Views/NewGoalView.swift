@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct NewGoalView: View {
-    @Binding var goalList: [Goal]
+    @ObservedObject var goalViewModel: GoalViewModel
     @Binding var showModal: Bool
+    
     @State var title: String = ""
     @State var description: String = ""
     @State var subgoals: [SubGoal] = []
@@ -21,10 +22,13 @@ struct NewGoalView: View {
     @State var endDate: Date = Date()
     @State var isPublic: Bool = true
     
+    var authViewModel = AuthViewModel()
+    
     func addNewGoal() {
         if goalType == .singleGoal {
-            goalList.append(
+            goalViewModel.goals.append(
                 SingleGoalGoal(
+                    userId: authViewModel.currentUserId!,
                     title: title,
                     description: description,
                     startDate: startDate,
@@ -33,8 +37,9 @@ struct NewGoalView: View {
                 )
             )
         } else if goalType == .subGoals {
-            goalList.append(
+            goalViewModel.goals.append(
                 SubGoalsGoal(
+                    userId: authViewModel.currentUserId!,
                     title: title,
                     description: description,
                     startDate: startDate,
@@ -44,8 +49,9 @@ struct NewGoalView: View {
                 )
             )
         } else if goalType == .progress {
-            goalList.append(
+            goalViewModel.goals.append(
                 ProgressGoal(
+                    userId: authViewModel.currentUserId!,
                     title: title,
                     description: description,
                     startDate: startDate,
@@ -89,10 +95,13 @@ struct NewGoalView: View {
 }
 
 struct NewGoalView_Previews: PreviewProvider {
-    @State static var goalList: [Goal] = []
+    @StateObject static var goalViewModel = GoalViewModel()
     @State static var showModal = true
     
     static var previews: some View {
-        NewGoalView(goalList: $goalList, showModal: $showModal)
+        NewGoalView(
+            goalViewModel: goalViewModel,
+            showModal: $showModal
+        )
     }
 }

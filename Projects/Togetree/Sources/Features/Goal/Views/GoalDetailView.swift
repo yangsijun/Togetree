@@ -68,6 +68,7 @@ struct GoalDetailView: View {
 struct GoalDetailView_Previews: PreviewProvider {
     @State static var goalList: [Goal] = [
         SingleGoalGoal(
+            userId: mockUserList[0].id,
             title: "앱 배포하기",
             description: "dfdsdfsdf",
             createdAt: Date(),
@@ -78,6 +79,7 @@ struct GoalDetailView_Previews: PreviewProvider {
             isCompleted: false
         ),
         SubGoalsGoal(
+            userId: mockUserList[0].id,
             title: "챌린지 2",
             description: "챌린지2를 통해 배우고 성장하기",
             createdAt: Date(),
@@ -94,6 +96,7 @@ struct GoalDetailView_Previews: PreviewProvider {
             ]
         ),
         ProgressGoal(
+            userId: mockUserList[0].id,
             title: "러닝으로 건강한 몸과 마음 만들기",
             description: "4월 한 달 동안 3km 러닝 10번 하기",
             createdAt: Date(),

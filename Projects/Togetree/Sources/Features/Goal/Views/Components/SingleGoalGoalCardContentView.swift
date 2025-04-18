@@ -17,6 +17,7 @@ struct SingleGoalGoalCardContentView: View {
 
 struct SingleGoalGoalCardContentView_Previews: PreviewProvider {
     @State static var goal = SingleGoalGoal(
+        userId: mockUserList[0].id,
         title: "앱 배포하기",
         description: "Togetree 앱 배포하기",
         startDate: Calendar.current.date(from: DateComponents(year: 2025, month: 4, day: 1))!,

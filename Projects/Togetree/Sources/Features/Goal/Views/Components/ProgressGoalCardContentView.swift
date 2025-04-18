@@ -22,6 +22,7 @@ struct ProgressGoalCardContentView: View {
 
 struct ProgressGoalCardContentView_Previews: PreviewProvider {
     @State static var goal = ProgressGoal(
+        userId: mockUserList[0].id,
         title: "러닝으로 건강한 몸과 마음 만들기",
         description: "4월 한 달 동안 3km 러닝 10번 하기",
         createdAt: Date(),

@@ -21,6 +21,7 @@ struct GoalTitleCardView: View {
 
 struct GoalTitleCardView_Previews: PreviewProvider {
     static var goal: Goal = SingleGoalGoal(
+        userId: mockUserList[0].id,
         title: "앱 배포하기",
         description: "dfdsdfsdf",
         createdAt: Date(),

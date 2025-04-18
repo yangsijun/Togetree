@@ -56,6 +56,7 @@ struct SubGoalsGoalCardContentView: View {
 
 struct SubGoalsGoalCardContentView_Previews: PreviewProvider {
     @State static var goal = SubGoalsGoal(
+        userId: mockUserList[0].id,
         title: "챌린지 2",
         description: "챌린지2를 통해 배우고 성장하기",
         createdAt: Date(),
