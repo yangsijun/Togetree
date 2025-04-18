@@ -8,12 +8,15 @@
 import SwiftUI
 
 struct ProfileHorizontalListView: View {
-    var userList: [User]
+    var followings: [User] = mockUserList
+    var followers: [User] = mockUserList
     
+    var userId: UUID
+        
     var body: some View {
         ScrollView(.horizontal) {
             HStack(spacing: 8) {
-                ForEach(userList) { user in
+                ForEach(followings) { user in
                     UserProfileView(user: user, imageSize: 64)
                 }
                 Button(action: {
@@ -31,18 +34,6 @@ struct ProfileHorizontalListView: View {
 
 struct ProfileHorizontalListView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileHorizontalListView(
-            userList: [
-                User(name: "Air", profileImageUrl: "https://picsum.photos/200/300"),
-                User(name: "Air", profileImageUrl: "https://picsum.photos/200/300"),
-                User(name: "Air", profileImageUrl: "https://picsum.photos/200/300"),
-                User(name: "Air", profileImageUrl: "https://picsum.photos/200/300"),
-                User(name: "Air", profileImageUrl: "https://picsum.photos/200/300"),
-                User(name: "Air", profileImageUrl: "https://picsum.photos/200/300"),
-                User(name: "Air", profileImageUrl: "https://picsum.photos/200/300"),
-                User(name: "Air", profileImageUrl: "https://picsum.photos/200/300"),
-                User(name: "Air", profileImageUrl: "https://picsum.photos/200/300"),
-            ]
-        )
+        ProfileHorizontalListView(userId: mockUserList[0].id)
     }
 }
