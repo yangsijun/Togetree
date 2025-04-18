@@ -121,7 +121,7 @@ struct GoalFormDetailView: View {
         case .progress:
             Section("Progress") {
                 LabeledContent("End Goal") {
-                    TextField("1", text: $endGoal)
+                    TextField("", text: $endGoal)
                         .multilineTextAlignment(.trailing)
                         .keyboardType(.numberPad)
                         .onChange(of: startValue) {
@@ -129,11 +129,11 @@ struct GoalFormDetailView: View {
                         }
                 }
                 LabeledContent("Progress Label") {
-                    TextField("Goals", text: $progressLabel)
+                    TextField("e.g. Times", text: $progressLabel)
                         .multilineTextAlignment(.trailing)
                 }
                 LabeledContent("Start Value") {
-                    TextField("0", text: $startValue)
+                    TextField("", text: $startValue)
                         .multilineTextAlignment(.trailing)
                         .keyboardType(.numberPad)
                         .onChange(of: startValue) {

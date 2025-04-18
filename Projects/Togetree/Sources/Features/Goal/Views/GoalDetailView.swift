@@ -74,7 +74,7 @@ struct GoalDetailView: View {
                 }
                 .sheet(isPresented: $showEditModal) {
                     NavigationStack {
-                        EditGoalView(goal: $goal, showModal: $showEditModal)
+                        EditGoalView(goalViewModel: goalViewModel, goal: $goal, showModal: $showEditModal)
                     }
                 }
                 .alert("정말 삭제할까요?", isPresented: $showDeleteAlert) {
@@ -145,7 +145,8 @@ struct GoalDetailView_Previews: PreviewProvider {
             endDate: Calendar.current.date(from: DateComponents(year: 2025, month: 4, day: 30))!,
             isPublic: true,
             currentProgress: 4,
-            endProgress: 10
+            endProgress: 10,
+            goalLabel: "번"
         ),
     ]
     

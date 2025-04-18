@@ -13,7 +13,7 @@ struct NewGoalView: View {
     
     @State var title: String = ""
     @State var description: String = ""
-    @State var subgoals: [SubGoal] = []
+    @State var subGoals: [SubGoal] = []
     @State var endGoal: String = ""
     @State var progressLabel: String = ""
     @State var startValue: String = ""
@@ -23,6 +23,17 @@ struct NewGoalView: View {
     @State var isPublic: Bool = true
     
     @EnvironmentObject private var authViewModel: AuthViewModel
+    
+    var isValidForm: Bool {
+        switch goalType {
+        case .singleGoal:
+            return !title.isEmpty
+        case .subGoals:
+            return !title.isEmpty && !subGoals.isEmpty
+        case .progress:
+            return !title.isEmpty && !startValue.isEmpty && !endGoal.isEmpty
+        }
+    }
     
     func addNewGoal() async throws {
         do {
@@ -46,7 +57,7 @@ struct NewGoalView: View {
                         startDate: startDate,
                         endDate: endDate,
                         isPublic: isPublic,
-                        subGoals: subgoals
+                        subGoals: subGoals
                     )
                 )
             } else if goalType == .progress {
@@ -58,8 +69,8 @@ struct NewGoalView: View {
                         startDate: startDate,
                         endDate: endDate,
                         isPublic: isPublic,
-                        currentProgress: Int(startValue) ?? 0,
-                        endProgress: Int(endGoal) ?? 1,
+                        currentProgress: Int(startValue)!,
+                        endProgress: Int(endGoal)!,
                         goalLabel: progressLabel
                     )
                 )
@@ -73,7 +84,7 @@ struct NewGoalView: View {
         GoalFormView(
             title: $title,
             description: $description,
-            subgoals: $subgoals,
+            subgoals: $subGoals,
             endGoal: $endGoal,
             progressLabel: $progressLabel,
             startValue: $startValue,
@@ -99,6 +110,7 @@ struct NewGoalView: View {
                     }
                     showModal = false
                 }
+                .disabled(!isValidForm)
             }
         }
     }
