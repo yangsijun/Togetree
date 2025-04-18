@@ -11,7 +11,7 @@ public class Goal: Identifiable, Codable {
     public var id: UUID
     public var userId: UUID
     public var title: String
-    public var description: String?
+    public var description: String
     public var createdAt: Date
     public var updatedAt: Date
     public var goalType: GoalType
@@ -23,7 +23,7 @@ public class Goal: Identifiable, Codable {
         id: UUID = UUID(),
         userId: UUID,
         title: String,
-        description: String? = nil,
+        description: String,
         createdAt: Date = Date(),
         updatedAt: Date = Date(),
         goalType: GoalType = .singleGoal,
@@ -64,7 +64,7 @@ public class Goal: Identifiable, Codable {
         self.id = try container.decode(UUID.self, forKey: .id)
         self.userId = try container.decode(UUID.self, forKey: .userId)
         self.title = try container.decode(String.self, forKey: .title)
-        self.description = try container.decodeIfPresent(String.self, forKey: .description)
+        self.description = try container.decode(String.self, forKey: .description)
         self.createdAt = try container.decode(Date.self, forKey: .createdAt)
         self.updatedAt = try container.decode(Date.self, forKey: .updatedAt)
         self.goalType = try container.decode(GoalType.self, forKey: .goalType)
@@ -104,7 +104,7 @@ public class SingleGoalGoal: Goal {
         id: UUID = UUID(),
         userId: UUID,
         title: String,
-        description: String? = nil,
+        description: String,
         createdAt: Date = Date(),
         updatedAt: Date = Date(),
         goalType: GoalType = .singleGoal,
@@ -147,7 +147,7 @@ public class SubGoalsGoal: Goal {
         id: UUID = UUID(),
         userId: UUID,
         title: String,
-        description: String? = nil,
+        description: String,
         createdAt: Date = Date(),
         updatedAt: Date = Date(),
         goalType: GoalType = .subGoals,
@@ -186,7 +186,7 @@ public class ProgressGoal: Goal {
         id: UUID = UUID(),
         userId: UUID,
         title: String,
-        description: String? = nil,
+        description: String,
         createdAt: Date = Date(),
         updatedAt: Date = Date(),
         goalType: GoalType = .progress,
@@ -195,7 +195,7 @@ public class ProgressGoal: Goal {
         isPublic: Bool = true,
         currentProgress: Int,
         endProgress: Int,
-        goalLabel: String? = nil
+        goalLabel: String
     ) {
         self.currentProgress = currentProgress
         self.endProgress = endProgress
@@ -211,7 +211,7 @@ public class ProgressGoal: Goal {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.currentProgress = try container.decode(Int.self, forKey: .currentProgress)
         self.endProgress = try container.decode(Int.self, forKey: .endProgress)
-        self.goalLabel = try container.decodeIfPresent(String.self, forKey: .goalLabel)
+        self.goalLabel = try container.decode(String.self, forKey: .goalLabel)
         try super.init(from: decoder)
     }
 
@@ -220,6 +220,6 @@ public class ProgressGoal: Goal {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(currentProgress, forKey: .currentProgress)
         try container.encode(endProgress, forKey: .endProgress)
-        try container.encodeIfPresent(goalLabel, forKey: .goalLabel)
+        try container.encode(goalLabel, forKey: .goalLabel)
     }
 }

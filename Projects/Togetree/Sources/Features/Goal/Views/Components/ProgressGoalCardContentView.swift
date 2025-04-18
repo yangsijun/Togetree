@@ -31,7 +31,8 @@ struct ProgressGoalCardContentView_Previews: PreviewProvider {
         endDate: Calendar.current.date(from: DateComponents(year: 2025, month: 4, day: 30))!,
         isPublic: true,
         currentProgress: 4,
-        endProgress: 10
+        endProgress: 10,
+        goalLabel: "번"
     )
     
     static var previews: some View {

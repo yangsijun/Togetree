@@ -48,7 +48,8 @@ class MockGoalService {
             endDate: Calendar.current.date(from: DateComponents(year: 2025, month: 4, day: 30))!,
             isPublic: true,
             currentProgress: 4,
-            endProgress: 10
+            endProgress: 10,
+            goalLabel: "번"
         ),
         SingleGoalGoal(
             userId: mockUserList[1].id,
