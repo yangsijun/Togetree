@@ -8,15 +8,26 @@
 import SwiftUI
 
 struct GoalListView: View {
-    @Binding var goals: [Goal]
+    let userId: UUID
+    @EnvironmentObject var authViewModel: AuthViewModel
+    @ObservedObject var goalViewModel: GoalViewModel
     
     var body: some View {
         VStack(spacing: 18) {
-            ForEach($goals) { goal in
+            ForEach($goalViewModel.goals) { goal in
                 GoalCardNavigationLinkView(goal: goal)
             }
         }
         .padding(20)
+        .onAppear {
+            Task {
+                do {
+                    try await goalViewModel.loadGoalsByUser(userId: userId)
+                } catch {
+                    print(error.localizedDescription)
+                }
+            }
+        }
     }
 }
 
@@ -65,9 +76,12 @@ struct GoalListView_Previews: PreviewProvider {
         )
     ]
     
+    @StateObject static var goalViewModel = GoalViewModel()
+    static let userId: UUID = AuthViewModel().currentUserId!
+
     static var previews: some View {
         NavigationStack {
-            GoalListView(goals: $goals)
+            GoalListView(userId: userId, goalViewModel: goalViewModel)
         }
         .tint(Color.tintColor)
     }

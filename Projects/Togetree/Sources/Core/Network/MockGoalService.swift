@@ -102,6 +102,8 @@ class MockGoalService {
         )
     ]
     
+    static let shared = MockGoalService()
+    
     func fetchGoalsByUser(userId: UUID) async throws -> [Goal] {
         let goals: [Goal] = self.goals.filter { $0.userId == userId }
         return goals
@@ -126,5 +128,8 @@ class MockGoalService {
 //        if let index = self.goals.firstIndex(of: goals.first(where: { $0.id == id })!) {
 //            self.goals.remove(at: index)
 //        }
+        for (index, g) in self.goals.enumerated() where g.id == id {
+            self.goals.remove(at: index)
+        }
     }
 }

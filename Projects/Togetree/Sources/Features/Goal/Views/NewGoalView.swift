@@ -22,46 +22,50 @@ struct NewGoalView: View {
     @State var endDate: Date = Date()
     @State var isPublic: Bool = true
     
-    var authViewModel = AuthViewModel()
+    @EnvironmentObject private var authViewModel: AuthViewModel
     
-    func addNewGoal() {
-        if goalType == .singleGoal {
-            goalViewModel.goals.append(
-                SingleGoalGoal(
-                    userId: authViewModel.currentUserId!,
-                    title: title,
-                    description: description,
-                    startDate: startDate,
-                    endDate: endDate,
-                    isPublic: isPublic
+    func addNewGoal() async throws {
+        do {
+            if goalType == .singleGoal {
+                try await goalViewModel.createGoal(
+                    SingleGoalGoal(
+                        userId: authViewModel.currentUserId!,
+                        title: title,
+                        description: description,
+                        startDate: startDate,
+                        endDate: endDate,
+                        isPublic: isPublic
+                    )
                 )
-            )
-        } else if goalType == .subGoals {
-            goalViewModel.goals.append(
-                SubGoalsGoal(
-                    userId: authViewModel.currentUserId!,
-                    title: title,
-                    description: description,
-                    startDate: startDate,
-                    endDate: endDate,
-                    isPublic: isPublic,
-                    subGoals: subgoals
+            } else if goalType == .subGoals {
+                try await goalViewModel.createGoal(
+                    SubGoalsGoal(
+                        userId: authViewModel.currentUserId!,
+                        title: title,
+                        description: description,
+                        startDate: startDate,
+                        endDate: endDate,
+                        isPublic: isPublic,
+                        subGoals: subgoals
+                    )
                 )
-            )
-        } else if goalType == .progress {
-            goalViewModel.goals.append(
-                ProgressGoal(
-                    userId: authViewModel.currentUserId!,
-                    title: title,
-                    description: description,
-                    startDate: startDate,
-                    endDate: endDate,
-                    isPublic: isPublic,
-                    currentProgress: Int(startValue) ?? 0,
-                    endProgress: Int(endGoal) ?? 1,
-                    goalLabel: progressLabel
+            } else if goalType == .progress {
+                try await goalViewModel.createGoal(
+                    ProgressGoal(
+                        userId: authViewModel.currentUserId!,
+                        title: title,
+                        description: description,
+                        startDate: startDate,
+                        endDate: endDate,
+                        isPublic: isPublic,
+                        currentProgress: Int(startValue) ?? 0,
+                        endProgress: Int(endGoal) ?? 1,
+                        goalLabel: progressLabel
+                    )
                 )
-            )
+            }
+        } catch {
+            print(error.localizedDescription)
         }
     }
     
@@ -86,7 +90,13 @@ struct NewGoalView: View {
             }
             ToolbarItem(placement: .confirmationAction) {
                 Button("Confirm") {
-                    addNewGoal()
+                    Task {
+                        do {
+                            try await addNewGoal()
+                        } catch {
+                            print(error.localizedDescription)
+                        }
+                    }
                     showModal = false
                 }
             }

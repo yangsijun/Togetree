@@ -13,13 +13,11 @@ class GoalViewModel: ObservableObject {
     @Published var isLoading: Bool = false
     @Published var errorMessage: String?
     
-//    private let service: GoalService = GoalService()
-    private let service: MockGoalService = MockGoalService()
+    private let service: MockGoalService = MockGoalService.shared
     
     func loadGoalsByUser(userId: UUID) async throws {
         isLoading = true
         defer { isLoading = false }
-        
         do {
             goals = try await service.fetchGoalsByUser(userId: userId)
         } catch {

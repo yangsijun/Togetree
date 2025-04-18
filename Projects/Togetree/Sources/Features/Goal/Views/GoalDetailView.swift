@@ -8,8 +8,14 @@
 import SwiftUI
 
 struct GoalDetailView: View {
+    @Environment(\.dismiss) private var dismiss
+    
     @Binding var goal: Goal
+    @StateObject private var goalViewModel = GoalViewModel()
     var isMyGoal: Bool = false
+    @State var showEditModal: Bool = false
+    @State var showDeleteAlert: Bool = false
+    
     @State var cheerTreesList: [User] = Array(
         repeating: User(name: "Air", profileImageUrl: "https://picsum.photos/200/300", statusMessage: "Hello, World!"),
         count: 9
@@ -54,14 +60,48 @@ struct GoalDetailView: View {
                 }) {
                     Image(systemName: "square.and.arrow.up")
                 }
-                Button(action: {
-                    // TODO: Edit Goal
-                }) {
-                    Image(systemName: "ellipsis")
+                Menu {
+                    Button(
+                        "Edit Goal",
+                        action: { showEditModal = true }
+                    )
+                    Button(
+                        "Delete Goal",
+                        action: { showDeleteAlert = true }
+                    )
+                } label: {
+                    Label("Menu", systemImage: "ellipsis")
+                }
+                .sheet(isPresented: $showEditModal) {
+                    NavigationStack {
+                        EditGoalView(goal: $goal, showModal: $showEditModal)
+                    }
+                }
+                .alert("정말 삭제할까요?", isPresented: $showDeleteAlert) {
+                    Button("삭제", role: .destructive) {
+                        Task {
+                            do {
+                                try await goalViewModel.deleteGoal(withId: goal.id)
+                            } catch {
+                                print(error.localizedDescription)
+                            }
+                        }
+                        dismiss()
+                    }
+                    Button("취소", role: .cancel) { }
+                } message: {
+                    Text("이 작업은 되돌릴 수 없습니다.")
                 }
             }
         }
         .tint(Color.tintColor)
+        .task {
+            do {
+                try await goalViewModel.loadGoalsByUser(userId: goal.userId)
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
     }
 }
     

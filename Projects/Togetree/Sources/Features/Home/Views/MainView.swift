@@ -19,7 +19,7 @@ struct MainView: View {
                 VStack(spacing: 0) {
                     ProfileHorizontalListView(userId: mockUserList[0].id)
                     Divider()
-                    GoalListView(goals: $goalViewModel.goals)
+                    GoalListView(userId: authViewModel.currentUserId!, goalViewModel: goalViewModel)
                 }
             }
             .background(Color.secondaryBackground)
@@ -46,13 +46,6 @@ struct MainView: View {
             .searchable(text: .constant(""))
         }
         .tint(Color.tintColor)
-        .task {
-            do {
-                try await goalViewModel.loadGoalsByUser(userId: authViewModel.currentUserId!)
-            } catch {
-                print(error.localizedDescription)
-            }
-        }
     }
 }
 
