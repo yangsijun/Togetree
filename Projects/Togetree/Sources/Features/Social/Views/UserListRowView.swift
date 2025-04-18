@@ -16,10 +16,10 @@ struct UserListRowView: View {
                 UserProfileView(user: user, imageSize: 52, showUsername: false)
                 VStack(alignment: .leading) {
                     Text(user.name)
+                        .foregroundStyle(Color.label)
                     Text(user.statusMessage ?? "")
                         .font(.caption)
-                        .foregroundColor(.secondary)
-                    
+                        .foregroundStyle(Color.secondaryLabel)
                 }
             }
         }
@@ -34,6 +34,8 @@ struct UserListRowView_Previews: PreviewProvider {
     )
     
     static var previews: some View {
-        UserListRowView(user: user)
+        NavigationStack {
+            UserListRowView(user: user)
+        }
     }
 }
