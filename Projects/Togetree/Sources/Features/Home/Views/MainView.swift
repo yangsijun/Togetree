@@ -10,16 +10,21 @@ import SwiftUI
 struct MainView: View {
     @EnvironmentObject private var authViewModel: AuthViewModel
     @StateObject private var goalViewModel = GoalViewModel()
+    @StateObject private var userViewModel = UserViewModel()
     
+    @State var selectedUser: User?
+//    @State var isLoading: Bool = true
     @State var showModal: Bool = false
     
     var body: some View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 0) {
-                    ProfileHorizontalListView(userId: mockUserList[0].id)
-                    Divider()
-                    GoalListView(userId: authViewModel.currentUserId!, goalViewModel: goalViewModel)
+                    if selectedUser != nil {
+                        ProfileHorizontalListView(selectedUser: $selectedUser, spacing: 12)
+                        GoalListView(selectedUser: $selectedUser, goalViewModel: goalViewModel)
+                    }
+
                 }
             }
             .background(Color.secondaryBackground)
@@ -46,11 +51,22 @@ struct MainView: View {
             .searchable(text: .constant(""))
         }
         .tint(Color.tintColor)
+        .task {
+            do {
+                try await userViewModel.loadUser(with: authViewModel.currentUserId!)
+                selectedUser = userViewModel.selectedUser
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
     }
 }
 
 struct MainView_Previews: PreviewProvider {
+    @State static var authViewModel = AuthViewModel()
+    
     static var previews: some View {
         MainView()
+            .environmentObject(authViewModel)
     }
 }
