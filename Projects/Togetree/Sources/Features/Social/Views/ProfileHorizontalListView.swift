@@ -30,7 +30,12 @@ struct ProfileHorizontalListView: View {
                     // TODO: Navigate to FollowAndFollowerView
                 }) {
                     Image(systemName: "chevron.forward.circle")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 24, height: 24)
                 }
+                .padding(.horizontal, 8)
+                .tint(Color.secondaryAccentColor)
             }
             .padding(.vertical, 10)
             .padding(.horizontal, 20)
@@ -43,6 +48,6 @@ struct ProfileHorizontalListView_Previews: PreviewProvider {
     @State static var selectedUser: User? = mockUserList[0]
     
     static var previews: some View {
-        ProfileHorizontalListView(selectedUser: $selectedUser)
+        ProfileHorizontalListView(selectedUser: $selectedUser, spacing: 12)
     }
 }
