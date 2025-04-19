@@ -8,16 +8,23 @@
 import SwiftUI
 
 struct ProfileHorizontalListView: View {
+    @Binding var selectedUser: User?
+    var spacing: CGFloat = 8
+    
     var followings: [User] = mockUserList
     var followers: [User] = mockUserList
-    
-    var userId: UUID
         
     var body: some View {
         ScrollView(.horizontal) {
-            HStack(spacing: 8) {
+            HStack(spacing: spacing) {
                 ForEach(followings) { user in
-                    UserProfileView(user: user, imageSize: 64)
+                    Button(action: {
+                        selectedUser = user
+                        print(user.name)
+                    }) {
+                        UserProfileView(user: user, imageSize: 64, isSelected: selectedUser!.id == user.id)
+                    }
+                    .tint(Color.label)
                 }
                 Button(action: {
                     // TODO: Navigate to FollowAndFollowerView
@@ -33,7 +40,9 @@ struct ProfileHorizontalListView: View {
 }
 
 struct ProfileHorizontalListView_Previews: PreviewProvider {
+    @State static var selectedUser: User? = mockUserList[0]
+    
     static var previews: some View {
-        ProfileHorizontalListView(userId: mockUserList[0].id)
+        ProfileHorizontalListView(selectedUser: $selectedUser)
     }
 }
