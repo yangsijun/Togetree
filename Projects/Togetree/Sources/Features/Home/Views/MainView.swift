@@ -22,6 +22,9 @@ struct MainView: View {
                 VStack(spacing: 0) {
                     if selectedUser != nil {
                         FollowingHorizontalListView(selectedUser: $selectedUser, followings: userViewModel.followings)
+                        UserProfileInfoView(user: selectedUser!, followers: userViewModel.followers, followings: userViewModel.followings)
+                            .padding(.horizontal, 20)
+                            .padding(.vertical, 10)
                         GoalListView(selectedUser: $selectedUser, goalViewModel: goalViewModel)
                     }
 
