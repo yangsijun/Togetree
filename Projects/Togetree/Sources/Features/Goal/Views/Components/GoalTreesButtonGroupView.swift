@@ -22,7 +22,7 @@ struct GoalTreesButtonGroupView: View {
                 .background(
                     isCheering
                         ? Capsule()
-                        .fill(Color.secondaryAccentColor.opacity(0.15))
+                            .fill(Color.secondaryAccentColor.opacity(0.15))
                             .stroke(Color.secondaryAccentColor, lineWidth: 1)
                         : Capsule()
                             .fill(Color.clear)
@@ -38,7 +38,7 @@ struct GoalTreesButtonGroupView: View {
                 .background(
                     isHelping
                         ? Capsule()
-                        .fill(Color.secondaryAccentColor.opacity(0.15))
+                            .fill(Color.secondaryAccentColor.opacity(0.15))
                             .stroke(Color.secondaryAccentColor, lineWidth: 1)
                         : Capsule()
                             .fill(Color.clear)
