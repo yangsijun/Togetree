@@ -8,12 +8,14 @@
 import SwiftUI
 
 struct FollowingHorizontalListView: View {
+    @EnvironmentObject var authViewModel: AuthViewModel
     @Binding var selectedUser: User?
     var followings: [User]
     
     var body: some View {
         ScrollView(.horizontal) {
             HStack {
+                FollowingHorziontalItemView(selectedUser: $selectedUser, user: authViewModel.currentUser!)
                 ForEach(followings) { user in
                     FollowingHorziontalItemView(selectedUser: $selectedUser, user: user)
                 }
@@ -36,10 +38,12 @@ struct FollowingHorizontalListView: View {
 }
 
 struct FollowingHorizontalListView_Previews: PreviewProvider {
+    @State static var authViewModel = AuthViewModel()
     @State static var selectedUser: User? = mockUserList[0]
     static var followings: [User] = Array(mockUserList[1...])
     
     static var previews: some View {
         FollowingHorizontalListView(selectedUser: $selectedUser, followings: followings)
+            .environmentObject(authViewModel)
     }
 }
