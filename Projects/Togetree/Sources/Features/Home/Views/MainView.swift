@@ -56,7 +56,7 @@ struct MainView: View {
         .tint(Color.tintColor)
         .task {
             do {
-                try await userViewModel.loadUser(with: authViewModel.currentUserId!)
+                try await userViewModel.loadUser(with: authViewModel.currentUser!.id)
                 selectedUser = userViewModel.selectedUser
             } catch {
                 print(error.localizedDescription)

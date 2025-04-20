@@ -43,7 +43,7 @@ struct EditGoalView: View {
         case .singleGoal:
             goal = SingleGoalGoal(
                 id: goal.id,
-                userId: authViewModel.currentUserId!,
+                userId: authViewModel.currentUser!.id,
                 title: title,
                 description: description,
                 startDate: startDate,
@@ -54,7 +54,7 @@ struct EditGoalView: View {
         case .subGoals:
             goal = SubGoalsGoal(
                 id: goal.id,
-                userId: authViewModel.currentUserId!,
+                userId: authViewModel.currentUser!.id,
                 title: title,
                 description: description,
                 startDate: startDate,
@@ -65,7 +65,7 @@ struct EditGoalView: View {
         case .progress:
             goal = ProgressGoal(
                 id: goal.id,
-                userId: authViewModel.currentUserId!,
+                userId: authViewModel.currentUser!.id,
                 title: title,
                 description: description,
                 startDate: startDate,

@@ -40,7 +40,7 @@ struct NewGoalView: View {
             if goalType == .singleGoal {
                 try await goalViewModel.createGoal(
                     SingleGoalGoal(
-                        userId: authViewModel.currentUserId!,
+                        userId: authViewModel.currentUser!.id,
                         title: title,
                         description: description,
                         startDate: startDate,
@@ -51,7 +51,7 @@ struct NewGoalView: View {
             } else if goalType == .subGoals {
                 try await goalViewModel.createGoal(
                     SubGoalsGoal(
-                        userId: authViewModel.currentUserId!,
+                        userId: authViewModel.currentUser!.id,
                         title: title,
                         description: description,
                         startDate: startDate,
@@ -63,7 +63,7 @@ struct NewGoalView: View {
             } else if goalType == .progress {
                 try await goalViewModel.createGoal(
                     ProgressGoal(
-                        userId: authViewModel.currentUserId!,
+                        userId: authViewModel.currentUser!.id,
                         title: title,
                         description: description,
                         startDate: startDate,

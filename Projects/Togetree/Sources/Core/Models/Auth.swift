@@ -15,7 +15,5 @@ struct AppleLoginRequest: Codable {
 
 struct LoginResponse: Codable {
     let token: String
-    let userId: UUID
+    let user: User
 }
-
-

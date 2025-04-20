@@ -1,12 +1,13 @@
 import SwiftUI
+import AuthenticationServices
 
 @main
 struct TogetreeApp: App {
-    @State private var authViewModel = AuthViewModel()
+    @StateObject private var authViewModel = AuthViewModel()
     
     var body: some Scene {
         WindowGroup {
-            MainView()
+            RootView()
                 .environmentObject(authViewModel)
         }
     }
