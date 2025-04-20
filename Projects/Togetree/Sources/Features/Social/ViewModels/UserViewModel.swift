@@ -42,4 +42,14 @@ class UserViewModel: ObservableObject {
             errorMessage = "Failed to load Followers: \(error.localizedDescription)"
         }
     }
+    
+    func createFollow(of user: User) async throws {
+        try await service.createFollow(of: user.id, to: selectedUser!.id)
+        try await loadFollowings()
+    }
+    
+    func deleteFollow(of user: User) async throws {
+        try await service.deleteFollow(of: user.id, to: selectedUser!.id)
+        try await loadFollowings()
+    }
 }
