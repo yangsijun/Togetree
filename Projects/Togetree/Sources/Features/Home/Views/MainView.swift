@@ -21,7 +21,7 @@ struct MainView: View {
             ScrollView {
                 VStack(spacing: 0) {
                     if selectedUser != nil {
-                        ProfileHorizontalListView(selectedUser: $selectedUser, spacing: 12)
+                        FollowingHorizontalListView(selectedUser: $selectedUser, followings: userViewModel.followings)
                         GoalListView(selectedUser: $selectedUser, goalViewModel: goalViewModel)
                     }
 

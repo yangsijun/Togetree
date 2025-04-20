@@ -13,7 +13,7 @@ struct UserListRowView: View {
     var body: some View {
         NavigationLink(destination: Text("Hello, World!")) {
             HStack {
-                UserProfileView(user: user, imageSize: 52, showUsername: false)
+                UserProfileImageView(user: user, imageSize: 52)
                 VStack(alignment: .leading) {
                     Text(user.name)
                         .foregroundStyle(Color.label)

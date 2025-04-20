@@ -7,11 +7,9 @@
 
 import SwiftUI
 
-struct UserProfileView: View {
+struct UserProfileImageView: View {
     var user: User
     var imageSize: Int
-    var showUsername: Bool = true
-    var isSelected: Bool = false
     
     var body: some View {
         Group {
@@ -28,41 +26,29 @@ struct UserProfileView: View {
                         .frame(width: CGFloat(imageSize), height: CGFloat(imageSize))
                         }
                 .clipShape(Circle())
-                .overlay {
-                    if isSelected {
-                        Circle()
-                            .stroke(Color.primary, lineWidth: 3)
-                            .frame(width: CGFloat(imageSize + 6), height: CGFloat(imageSize + 6))
-                    }
-                }
-//                .shadow(color: .tertiaryColor, radius: isSelected ? 6 : 0)
-                Group {
-                    if showUsername {
-                        Text(user.name)
-                            .bold(isSelected)
-                    }
-                }
+                .overlay(
+                    Circle()
+                        .stroke(Color.gray.opacity(0.2), lineWidth: 1)
+                )
             }
         }
     }
 }
 
-struct UserProfileView_Previews: PreviewProvider {
+struct UserProfileImageView_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
-            UserProfileView(
-                user: .init(name: "Test User", profileImageUrl: "https://picsum.photos/200/300"),
-                imageSize: 100,
-                isSelected: true
-            )
-            UserProfileView(
+            UserProfileImageView(
                 user: .init(name: "Test User", profileImageUrl: "https://picsum.photos/200/300"),
                 imageSize: 100
             )
-            UserProfileView(
+            UserProfileImageView(
                 user: .init(name: "Test User", profileImageUrl: "https://picsum.photos/200/300"),
-                imageSize: 64,
-                showUsername: false
+                imageSize: 64
+            )
+            UserProfileImageView(
+                user: .init(name: "Test User", profileImageUrl: "https://picsum.photos/200/300"),
+                imageSize: 32
             )
         }
     }

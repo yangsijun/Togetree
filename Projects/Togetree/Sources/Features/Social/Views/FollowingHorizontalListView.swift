@@ -1,30 +1,21 @@
 //
-//  HorizontalProfileListView.swift
+//  FollowingHorizontalListView.swift
 //  Togetree
 //
-//  Created by 양시준 on 4/14/25.
+//  Created by 양시준 on 4/20/25.
 //
 
 import SwiftUI
 
-struct ProfileHorizontalListView: View {
+struct FollowingHorizontalListView: View {
     @Binding var selectedUser: User?
-    var spacing: CGFloat = 8
+    var followings: [User]
     
-    var followings: [User] = mockUserList
-    var followers: [User] = mockUserList
-        
     var body: some View {
         ScrollView(.horizontal) {
-            HStack(spacing: spacing) {
+            HStack {
                 ForEach(followings) { user in
-                    Button(action: {
-                        selectedUser = user
-                        print(user.name)
-                    }) {
-                        UserProfileImageView(user: user, imageSize: 64)
-                    }
-                    .tint(Color.label)
+                    FollowingHorziontalItemView(selectedUser: $selectedUser, user: user)
                 }
                 Button(action: {
                     // TODO: Navigate to FollowAndFollowerView
@@ -44,10 +35,11 @@ struct ProfileHorizontalListView: View {
     }
 }
 
-struct ProfileHorizontalListView_Previews: PreviewProvider {
+struct FollowingHorizontalListView_Previews: PreviewProvider {
     @State static var selectedUser: User? = mockUserList[0]
+    static var followings: [User] = Array(mockUserList[1...])
     
     static var previews: some View {
-        ProfileHorizontalListView(selectedUser: $selectedUser, spacing: 12)
+        FollowingHorizontalListView(selectedUser: $selectedUser, followings: followings)
     }
 }

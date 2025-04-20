@@ -29,7 +29,7 @@ struct GoalTreesHorizontalListView: View {
             ScrollView(.horizontal) {
                 HStack(spacing: 6) {
                     ForEach(userList.suffix(visibleProfileCount)) { user in
-                        UserProfileView(user: user, imageSize: 32, showUsername: false)
+                        UserProfileImageView(user: user, imageSize: 32)
                     }
                     Group {
                         if userList.count <= visibleProfileCount {
