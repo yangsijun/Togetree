@@ -9,6 +9,7 @@ import Foundation
 
 @MainActor
 class UserViewModel: ObservableObject {
+    @Published var myUser: User?
     @Published var selectedUser: User?
     @Published var followings: [User] = []
     @Published var followers: [User] = []
@@ -16,6 +17,14 @@ class UserViewModel: ObservableObject {
     
 //    private let service: UserService = UserService()
     private let service: MockUserService = MockUserService()
+    
+    func loadMyUser(with id: UUID) async throws {
+        do {
+            myUser = try await service.fetchUser(id: id)
+        } catch {
+            errorMessage = "Failed to load MyUser: \(error.localizedDescription)"
+        }
+    }
     
     func loadUser(with id: UUID) async throws {
         do {
