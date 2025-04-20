@@ -14,7 +14,10 @@ struct GoalTreesView: View {
     var body: some View {
         List {
             ForEach(userList) { user in
-                UserListRowView(user: user)
+                // TODO: Link to OtherUserDetailView
+                NavigationLink(destination: Text("Detail")) {
+                    UserRowView(user: user, imageSize: 52)
+                }
             }
         }
         .listStyle(.plain)
