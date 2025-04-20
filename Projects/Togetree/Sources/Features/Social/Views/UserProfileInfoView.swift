@@ -14,13 +14,7 @@ struct UserProfileInfoView: View {
     
     var body: some View {
         HStack(spacing: 8) {
-            UserProfileImageView(user: user, imageSize: 64)
-            VStack(alignment: .leading) {
-                Text(user.name)
-                Text(user.statusMessage ?? "")
-                    .font(.caption)
-                    .foregroundStyle(Color.secondaryLabel)
-            }
+            UserRowView(user: user, imageSize: 64)
             Spacer()
             NavigationLink(destination: Text("Hello, World!")) {
                 VStack {

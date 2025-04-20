@@ -9,7 +9,7 @@ import SwiftUI
 
 struct UserProfileImageView: View {
     var user: User
-    var imageSize: Int
+    var imageSize: CGFloat
     
     var body: some View {
         Group {
@@ -18,12 +18,12 @@ struct UserProfileImageView: View {
                     image
                         .resizable()
                         .scaledToFill()
-                        .frame(width: CGFloat(imageSize), height: CGFloat(imageSize))
+                        .frame(width: imageSize, height: imageSize)
                 } placeholder: {
                     Image(systemName: "person.circle.fill")
                         .resizable()
                         .scaledToFill()
-                        .frame(width: CGFloat(imageSize), height: CGFloat(imageSize))
+                        .frame(width: imageSize, height: imageSize)
                         }
                 .clipShape(Circle())
                 .overlay(
