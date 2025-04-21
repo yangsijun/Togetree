@@ -8,26 +8,24 @@
 import SwiftUI
 
 struct MainView: View {
-    @EnvironmentObject private var authViewModel: AuthViewModel
-    @StateObject private var goalViewModel = GoalViewModel()
-    @StateObject private var userViewModel = UserViewModel()
-    
-    @State var selectedUser: User?
-//    @State var isLoading: Bool = true
+    @Environment(AuthViewModel.self) var authViewModel
+    @Environment(UserViewModel.self) var myUserViewModel
+    @Bindable var userViewModel = UserViewModel()
+    @State var goalViewModel = GoalViewModel()
+    @State var focusedUser: User?
     @State var showModal: Bool = false
     
     var body: some View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 0) {
-                    if selectedUser != nil {
-                        FollowingHorizontalListView(selectedUser: $selectedUser, followings: userViewModel.followings)
-                        UserProfileInfoView(user: selectedUser!, followers: userViewModel.followers, followings: userViewModel.followings)
+                    if userViewModel.user != nil {
+                        FollowingHorizontalListView(myUser: myUserViewModel.user!, userList: myUserViewModel.followings, focusedUser: $focusedUser)
+                        UserProfileInfoView(user: userViewModel.user!, followers: userViewModel.followers, followings: userViewModel.followings)
                             .padding(.horizontal, 20)
                             .padding(.vertical, 10)
-                        GoalListView(selectedUser: $selectedUser, goalViewModel: goalViewModel)
+                        GoalListView(user: userViewModel.user!, goalViewModel: goalViewModel)
                     }
-
                 }
             }
             .background(Color.secondaryBackground)
@@ -36,6 +34,7 @@ struct MainView: View {
             .toolbar {
                 ToolbarItemGroup {
                     Button(action: {
+                        focusedUser = myUserViewModel.user
                         showModal = true
                     }) {
                         Image(systemName: "plus")
@@ -56,10 +55,19 @@ struct MainView: View {
         .tint(Color.tintColor)
         .task {
             do {
-                try await userViewModel.loadUser(with: authViewModel.currentUser!.id)
-                selectedUser = userViewModel.selectedUser
+                try await myUserViewModel.loadUser(with: authViewModel.currentUser!.id)
+                focusedUser = myUserViewModel.user
             } catch {
                 print(error.localizedDescription)
+            }
+        }
+        .onChange(of: focusedUser) {
+            Task {
+                do {
+                    try await userViewModel.loadUser(with: focusedUser!.id)
+                } catch {
+                    print(error.localizedDescription)
+                }
             }
         }
     }
@@ -67,9 +75,11 @@ struct MainView: View {
 
 struct MainView_Previews: PreviewProvider {
     @State static var authViewModel = AuthViewModel()
+    @State static var myUserViewModel = UserViewModel()
     
     static var previews: some View {
         MainView()
-            .environmentObject(authViewModel)
+            .environment(authViewModel)
+            .environment(myUserViewModel)
     }
 }

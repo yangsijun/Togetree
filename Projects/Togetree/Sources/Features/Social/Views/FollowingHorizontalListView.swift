@@ -8,16 +8,16 @@
 import SwiftUI
 
 struct FollowingHorizontalListView: View {
-    @EnvironmentObject var authViewModel: AuthViewModel
-    @Binding var selectedUser: User?
-    var followings: [User]
+    var myUser: User
+    var userList: [User]
+    @Binding var focusedUser: User?
     
     var body: some View {
         ScrollView(.horizontal) {
             HStack {
-                FollowingHorziontalItemView(selectedUser: $selectedUser, user: authViewModel.currentUser!)
-                ForEach(followings) { user in
-                    FollowingHorziontalItemView(selectedUser: $selectedUser, user: user)
+                FollowingHorziontalItemView(user: myUser, focusedUser: $focusedUser)
+                ForEach(userList) { user in
+                    FollowingHorziontalItemView(user: user, focusedUser: $focusedUser)
                 }
                 Button(action: {
                     // TODO: Navigate to FollowAndFollowerView
@@ -39,11 +39,20 @@ struct FollowingHorizontalListView: View {
 
 struct FollowingHorizontalListView_Previews: PreviewProvider {
     @State static var authViewModel = AuthViewModel()
-    @State static var selectedUser: User? = mockUserList[0]
-    static var followings: [User] = Array(mockUserList[1...])
+    @State static var myUserViewModel = UserViewModel()
+    @State static var userViewModel = UserViewModel()
     
     static var previews: some View {
-        FollowingHorizontalListView(selectedUser: $selectedUser, followings: followings)
-            .environmentObject(authViewModel)
+        FollowingHorizontalListView(myUser: mockUserList[0], userList: myUserViewModel.followings, focusedUser: $userViewModel.user)
+            .onAppear {
+                Task {
+                    do {
+                        try await myUserViewModel.loadUser(with: authViewModel.currentUser!.id)
+                        try await userViewModel.loadUser(with: authViewModel.currentUser!.id)
+                    } catch {
+                        print(error.localizedDescription)
+                    }
+                }
+            }
     }
 }

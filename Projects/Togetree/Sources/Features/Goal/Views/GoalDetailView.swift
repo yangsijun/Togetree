@@ -11,7 +11,7 @@ struct GoalDetailView: View {
     @Environment(\.dismiss) private var dismiss
     
     @Binding var goal: Goal
-    @StateObject private var goalViewModel = GoalViewModel()
+    @State var goalViewModel = GoalViewModel()
     var isMyGoal: Bool = false
     @State var showEditModal: Bool = false
     @State var showDeleteAlert: Bool = false

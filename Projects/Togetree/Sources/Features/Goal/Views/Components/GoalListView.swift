@@ -8,9 +8,8 @@
 import SwiftUI
 
 struct GoalListView: View {
-    @Binding var selectedUser: User?
-//    @EnvironmentObject var authViewModel: AuthViewModel
-    @ObservedObject var goalViewModel: GoalViewModel
+    var user: User
+    @Bindable var goalViewModel: GoalViewModel
     
     var body: some View {
         VStack(spacing: 18) {
@@ -23,16 +22,16 @@ struct GoalListView: View {
         .onAppear {
             Task {
                 do {
-                    try await goalViewModel.loadGoalsByUser(userId: selectedUser!.id)
+                    try await goalViewModel.loadGoalsByUser(userId: user.id)
                 } catch {
                     print(error.localizedDescription)
                 }
             }
         }
-        .onChange(of: selectedUser) {
+        .onChange(of: user) {
             Task {
                 do {
-                    try await goalViewModel.loadGoalsByUser(userId: selectedUser!.id)
+                    try await goalViewModel.loadGoalsByUser(userId: user.id)
                 } catch {
                     print(error.localizedDescription)
                 }
@@ -86,13 +85,12 @@ struct GoalListView_Previews: PreviewProvider {
         )
     ]
     
-    @StateObject static var goalViewModel = GoalViewModel()
-//    static let userId: UUID = AuthViewModel().currentUserId!
-    @State static var selectedUser: User? = mockUserList[0]
+    @State static var user: User = mockUserList[0]
+    @State static var goalViewModel = GoalViewModel()
 
     static var previews: some View {
         NavigationStack {
-            GoalListView(selectedUser: $selectedUser, goalViewModel: goalViewModel)
+            GoalListView(user: user, goalViewModel: goalViewModel)
         }
         .tint(Color.tintColor)
     }

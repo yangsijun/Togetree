@@ -8,12 +8,14 @@
 import SwiftUI
 
 struct RootView: View {
-    @EnvironmentObject var authViewModel: AuthViewModel
+    @Environment(AuthViewModel.self) var authViewModel
+    @State var myUserViewModel = UserViewModel()
 
     var body: some View {
         Group {
             if authViewModel.isSignedIn {
                 MainView()
+                    .environment(myUserViewModel)
             } else {
                 SignInView()
             }

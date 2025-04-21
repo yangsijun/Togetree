@@ -8,10 +8,10 @@
 import Foundation
 
 @MainActor
-class GoalViewModel: ObservableObject {
-    @Published var goals: [Goal] = []
-    @Published var isLoading: Bool = false
-    @Published var errorMessage: String?
+@Observable class GoalViewModel {
+    var goals: [Goal] = []
+    var isLoading: Bool = false
+    var errorMessage: String?
     
     private let service: MockGoalService = MockGoalService.shared
     

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct NewGoalView: View {
-    @ObservedObject var goalViewModel: GoalViewModel
+    var goalViewModel: GoalViewModel
     @Binding var showModal: Bool
     
     @State var title: String = ""
@@ -22,7 +22,7 @@ struct NewGoalView: View {
     @State var endDate: Date = Date()
     @State var isPublic: Bool = true
     
-    @EnvironmentObject private var authViewModel: AuthViewModel
+    @Environment(AuthViewModel.self) private var authViewModel
     
     var isValidForm: Bool {
         switch goalType {
@@ -117,7 +117,7 @@ struct NewGoalView: View {
 }
 
 struct NewGoalView_Previews: PreviewProvider {
-    @StateObject static var goalViewModel = GoalViewModel()
+    @State static var goalViewModel = GoalViewModel()
     @State static var showModal = true
     
     static var previews: some View {

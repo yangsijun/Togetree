@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct EditGoalView: View {
-    @ObservedObject var goalViewModel: GoalViewModel
+    var goalViewModel: GoalViewModel
     
-    @EnvironmentObject private var authViewModel: AuthViewModel
+    @Environment(AuthViewModel.self) var authViewModel
     
     @Binding var goal: Goal
     @Binding var showModal: Bool

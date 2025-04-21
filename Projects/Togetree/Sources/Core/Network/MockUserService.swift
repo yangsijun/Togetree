@@ -26,7 +26,7 @@ var mockFollowingList: [UUID: [UUID]] = [
     ],
     UUID(uuidString: "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeee2")!: [
         UUID(uuidString: "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeee0")!,
-        UUID(uuidString: "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeee2")!,
+        UUID(uuidString: "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeee1")!,
         UUID(uuidString: "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeee3")!,
     ],
     UUID(uuidString: "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeee3")!: [

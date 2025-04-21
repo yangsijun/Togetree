@@ -5,30 +5,22 @@
 //  Created by 양시준 on 4/18/25.
 //
 
+import SwiftUI
 import Foundation
 
 @MainActor
-class UserViewModel: ObservableObject {
-    @Published var myUser: User?
-    @Published var selectedUser: User?
-    @Published var followings: [User] = []
-    @Published var followers: [User] = []
-    @Published var errorMessage: String?
+@Observable class UserViewModel {
+    var user: User?
+    var followings: [User] = []
+    var followers: [User] = []
+    var errorMessage: String?
     
 //    private let service: UserService = UserService()
     private let service: MockUserService = MockUserService()
     
-    func loadMyUser(with id: UUID) async throws {
-        do {
-            myUser = try await service.fetchUser(id: id)
-        } catch {
-            errorMessage = "Failed to load MyUser: \(error.localizedDescription)"
-        }
-    }
-    
     func loadUser(with id: UUID) async throws {
         do {
-            selectedUser = try await service.fetchUser(id: id)
+            user = try await service.fetchUser(id: id)
             try await loadFollowings()
             try await loadFollowers()
         } catch {
@@ -38,7 +30,7 @@ class UserViewModel: ObservableObject {
     
     func loadFollowings() async throws {
         do {
-            followings = try await service.loadFollowings(of: selectedUser!.id)
+            followings = try await service.loadFollowings(of: user!.id)
         } catch {
             errorMessage = "Failed to load Followings: \(error.localizedDescription)"
         }
@@ -46,19 +38,23 @@ class UserViewModel: ObservableObject {
     
     func loadFollowers() async throws {
         do {
-            followers = try await service.loadFollowers(of: selectedUser!.id)
+            followers = try await service.loadFollowers(of: user!.id)
         } catch {
             errorMessage = "Failed to load Followers: \(error.localizedDescription)"
         }
     }
     
-    func createFollow(of user: User) async throws {
-        try await service.createFollow(of: user.id, to: selectedUser!.id)
+    func isFollowing(_ user: User) -> Bool {
+        followings.contains(where: { $0.id == user.id })
+    }
+    
+    func createFollow(to user: User) async throws {
+        try await service.createFollow(of: self.user!.id, to: user.id)
         try await loadFollowings()
     }
     
-    func deleteFollow(of user: User) async throws {
-        try await service.deleteFollow(of: user.id, to: selectedUser!.id)
+    func deleteFollow(to user: User) async throws {
+        try await service.deleteFollow(of: self.user!.id, to: user.id)
         try await loadFollowings()
     }
 }

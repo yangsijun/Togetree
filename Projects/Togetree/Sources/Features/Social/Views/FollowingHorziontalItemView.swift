@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct FollowingHorziontalItemView: View {
-    @Binding var selectedUser: User?
     var user: User
+    @Binding var focusedUser: User?
     
     var body: some View {
         Button(action: {
-            selectedUser = user
+            focusedUser = user
             print(user.name)
         }) {
             HStack {
@@ -22,12 +22,12 @@ struct FollowingHorziontalItemView: View {
                     imageSize: 36
                 )
                 Text(user.name)
-                    .bold(selectedUser == user)
+                    .bold(focusedUser == user)
             }
             .padding(.vertical, 8)
             .padding(.horizontal, 12)
             .background(
-                selectedUser == user
+                focusedUser == user
                     ? RoundedRectangle(cornerRadius: 16)
                         .fill(Color.tertiaryBackground)
                         .stroke(Color.primary, lineWidth: 2)
@@ -41,13 +41,12 @@ struct FollowingHorziontalItemView: View {
 }
 
 struct FollowingHorziontalItemView_Previews: PreviewProvider {
-    @State static var selectedUser: User? = mockUserList[0]
-    static var user = mockUserList[0]
+    @State static var focusedUser: User? = mockUserList[0]
     
     static var previews: some View {
         HStack {
-            FollowingHorziontalItemView(selectedUser: $selectedUser, user: user)
-            FollowingHorziontalItemView(selectedUser: $selectedUser, user: mockUserList[1])
+            FollowingHorziontalItemView(user: mockUserList[0], focusedUser: $focusedUser)
+            FollowingHorziontalItemView(user: mockUserList[1], focusedUser: $focusedUser)
         }
     }
 }

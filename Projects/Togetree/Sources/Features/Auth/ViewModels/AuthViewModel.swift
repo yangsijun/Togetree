@@ -5,14 +5,15 @@
 //  Created by 양시준 on 4/18/25.
 //
 
+import SwiftUI
 import AuthenticationServices
 import Foundation
 
 @MainActor
-class AuthViewModel: ObservableObject {
-    @Published var isSignedIn: Bool = false
-    @Published var currentUser: User? = mockUserList[0]
-    @Published var errorMessage: String?
+@Observable class AuthViewModel {
+    var isSignedIn: Bool = false
+    var currentUser: User? = mockUserList[0]
+    var errorMessage: String?
     
 //    private let service: AuthService = AuthService()
     private let service: MockAuthService = MockAuthService()

@@ -9,7 +9,7 @@ import SwiftUI
 import AuthenticationServices
 
 struct SignInView: View {
-    @EnvironmentObject var authViewModel: AuthViewModel
+    @Environment(AuthViewModel.self) var authViewModel
     
     var body: some View {
         SignInWithAppleButton(
@@ -48,6 +48,6 @@ struct SignInView_Previews: PreviewProvider {
     @State static var authViewModel = AuthViewModel()
     static var previews: some View {
         SignInView()
-            .environmentObject(authViewModel)
+            .environment(authViewModel)
     }
 }
