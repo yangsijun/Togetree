@@ -21,6 +21,7 @@ struct UserRowView: View {
                     .font(.caption)
                     .foregroundStyle(Color.secondaryLabel)
             }
+            Spacer()
         }
     }
 }
