@@ -8,18 +8,23 @@
 import SwiftUI
 
 struct FollowButtonView: View {
-    @Binding var isFollowing: Bool
+    var isFollowing: Bool
+    @Binding var isButtonClicked: Bool
     
     public var body: some View {
         if isFollowing {
-            Button(action: { isFollowing.toggle() }) {
+            Button(action: {
+                isButtonClicked.toggle()
+            }) {
                 Text("Following")
             }
             .buttonStyle(.bordered)
             .buttonBorderShape(.capsule)
             .tint(Color.secondaryAccentColor)
         } else {
-            Button(action: { isFollowing.toggle() }) {
+            Button(action: {
+                isButtonClicked.toggle()
+            }) {
                 Text("Follow")
             }
             .buttonStyle(.borderedProminent)
@@ -32,8 +37,8 @@ struct FollowButtonView: View {
 struct FollowButtonView_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
-            FollowButtonView(isFollowing: .constant(true))
-            FollowButtonView(isFollowing: .constant(false))
+            FollowButtonView(isFollowing: true, isButtonClicked: .constant(false))
+            FollowButtonView(isFollowing: false, isButtonClicked: .constant(false))
         }
     }
 }
