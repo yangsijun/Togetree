@@ -9,6 +9,7 @@ import SwiftUI
 
 struct GoalCardView: View {
     @Binding var goal: Goal    
+    var isMyGoal: Bool
     var showTextView: Bool = true
     var expanded: Bool = false
     var showExpandButton: Bool = true
@@ -28,7 +29,8 @@ struct GoalCardView: View {
                             goal: Binding<SingleGoalGoal>(
                                 get: { self.goal as! SingleGoalGoal },
                                 set: { self.goal = $0 }
-                            )
+                            ),
+                            isMyGoal: isMyGoal
                         )
                     }
                 case .subGoals:
@@ -38,6 +40,7 @@ struct GoalCardView: View {
                                 get: { self.goal as! SubGoalsGoal },
                                 set: { self.goal = $0 }
                             ),
+                            isMyGoal: isMyGoal,
                             expanded: expanded,
                             showExpandButton: showExpandButton
                         )
@@ -48,7 +51,8 @@ struct GoalCardView: View {
                             goal: Binding<ProgressGoal>(
                                 get: { self.goal as! ProgressGoal },
                                 set: { self.goal = $0 }
-                            )
+                            ),
+                            isMyGoal: isMyGoal
                         )
                     }
                 }
@@ -110,10 +114,12 @@ struct GoalCardView_Previews: PreviewProvider {
         ScrollView {
             ForEach($goals) { goal in
                 GoalCardView(
-                    goal: goal
+                    goal: goal,
+                    isMyGoal: true
                 )
                 GoalCardView(
                     goal: goal,
+                    isMyGoal: true,
                     showTextView: false
                 )
             }

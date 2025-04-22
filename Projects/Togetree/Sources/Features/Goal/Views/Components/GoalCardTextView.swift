@@ -24,9 +24,13 @@ struct GoalCardTextView: View {
             Spacer()
             Group {
                 if isPublic {
-                    Image(systemName: "globe")
+//                    Image(systemName: "globe")
+                    Label("Public", systemImage: "globe")
+                        .font(.caption2)
                 } else {
-                    Image(systemName: "lock")
+//                    Image(systemName: "lock")
+                    Label("Private", systemImage: "lock")
+                        .font(.caption2)
                 }
             }
             .font(.subheadline)

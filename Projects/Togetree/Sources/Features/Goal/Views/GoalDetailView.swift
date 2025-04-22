@@ -12,7 +12,7 @@ struct GoalDetailView: View {
     
     @Binding var goal: Goal
     @State var goalViewModel = GoalViewModel()
-    var isMyGoal: Bool = false
+    var isMyGoal: Bool
     @State var showEditModal: Bool = false
     @State var showDeleteAlert: Bool = false
     
@@ -33,6 +33,7 @@ struct GoalDetailView: View {
                 GoalTitleCardView(goal: goal)
                 GoalCardView(
                     goal: $goal,
+                    isMyGoal: isMyGoal,
                     showTextView: false,
                     expanded: true,
                     showExpandButton: false
@@ -151,6 +152,6 @@ struct GoalDetailView_Previews: PreviewProvider {
     ]
     
     static var previews: some View {
-        GoalDetailView(goal: $goalList[1])
+        GoalDetailView(goal: $goalList[1], isMyGoal: true)
     }
 }

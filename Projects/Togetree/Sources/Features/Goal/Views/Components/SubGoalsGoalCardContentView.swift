@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SubGoalsGoalCardContentView: View {
     @Binding var goal: SubGoalsGoal
+    var isMyGoal: Bool
     @State var expanded: Bool = false
     var showExpandButton: Bool = true
     
@@ -21,13 +22,14 @@ struct SubGoalsGoalCardContentView: View {
             VStack(spacing: 10) {
                 if expanded {
                     ForEach($goal.subGoals) { subGoal in
-                        GoalCheckBoxView(text: subGoal.title.wrappedValue, isCompleted: subGoal.isCompleted)
+                        GoalCheckBoxView(text: subGoal.title.wrappedValue, isCompleted: subGoal.isCompleted, isMyGoal: isMyGoal)
                     }
                 } else {
                     if let index = goal.subGoals.firstIndex(where: { !$0.isCompleted }) {
                         GoalCheckBoxView(
                             text: goal.subGoals[index].title,
-                            isCompleted: $goal.subGoals[index].isCompleted
+                            isCompleted: $goal.subGoals[index].isCompleted,
+                            isMyGoal: isMyGoal
                         )
                     }
                 }
@@ -77,10 +79,12 @@ struct SubGoalsGoalCardContentView_Previews: PreviewProvider {
         NavigationStack {
             VStack {
                 SubGoalsGoalCardContentView(
-                    goal: $goal
+                    goal: $goal,
+                    isMyGoal: true
                 )
                 SubGoalsGoalCardContentView(
                     goal: $goal,
+                    isMyGoal: true,
                     expanded: true,
                     showExpandButton: false
                 )

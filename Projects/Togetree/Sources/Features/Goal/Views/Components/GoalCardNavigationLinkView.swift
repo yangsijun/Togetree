@@ -9,11 +9,12 @@ import SwiftUI
 
 struct GoalCardNavigationLinkView: View {
     @Binding var goal: Goal
+    var isMyGoal: Bool
     var showTextView: Bool = true
     
     var body: some View {
-        NavigationLink(destination: GoalDetailView(goal: $goal)) {
-            GoalCardView(goal: $goal)
+        NavigationLink(destination: GoalDetailView(goal: $goal, isMyGoal: isMyGoal)) {
+            GoalCardView(goal: $goal, isMyGoal: isMyGoal, showTextView: showTextView)
         }
         .buttonStyle(.plain)
     }
@@ -65,9 +66,9 @@ struct GoalCardNavigationLinkView_Previews: PreviewProvider {
     ]
     static var previews: some View {
         NavigationStack {
-            GoalCardNavigationLinkView(goal: $goals[0])
-            GoalCardNavigationLinkView(goal: $goals[1])
-            GoalCardNavigationLinkView(goal: $goals[2])
+            GoalCardNavigationLinkView(goal: $goals[0], isMyGoal: true)
+            GoalCardNavigationLinkView(goal: $goals[1], isMyGoal: true)
+            GoalCardNavigationLinkView(goal: $goals[2], isMyGoal: true)
         }
     }
 }

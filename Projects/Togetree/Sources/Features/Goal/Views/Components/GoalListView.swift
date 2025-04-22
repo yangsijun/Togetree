@@ -8,13 +8,15 @@
 import SwiftUI
 
 struct GoalListView: View {
+    @Environment(UserViewModel.self) var myUserViewModel
     var user: User
     @Bindable var goalViewModel: GoalViewModel
+    var isMyGoal: Bool
     
     var body: some View {
         VStack(spacing: 18) {
             ForEach($goalViewModel.goals) { goal in
-                GoalCardNavigationLinkView(goal: goal)
+                GoalCardNavigationLinkView(goal: goal, isMyGoal: myUserViewModel.user!.id == user.id)
             }
         }
         .padding(.horizontal, 20)
@@ -23,6 +25,7 @@ struct GoalListView: View {
             Task {
                 do {
                     try await goalViewModel.loadGoalsByUser(userId: user.id)
+                    
                 } catch {
                     print(error.localizedDescription)
                 }
@@ -87,10 +90,19 @@ struct GoalListView_Previews: PreviewProvider {
     
     @State static var user: User = mockUserList[0]
     @State static var goalViewModel = GoalViewModel()
+    @State static var myUserViewModel = UserViewModel()
 
     static var previews: some View {
         NavigationStack {
-            GoalListView(user: user, goalViewModel: goalViewModel)
+            GoalListView(user: user, goalViewModel: goalViewModel, isMyGoal: true)
+                .environment(myUserViewModel)
+                .task {
+                    do {
+                        try await myUserViewModel.loadUser(with: user.id)
+                    } catch {
+                        print(error.localizedDescription)
+                    }
+                }
         }
         .tint(Color.tintColor)
     }

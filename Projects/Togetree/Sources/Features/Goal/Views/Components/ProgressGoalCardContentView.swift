@@ -9,13 +9,14 @@ import SwiftUI
 
 struct ProgressGoalCardContentView: View {
     @Binding var goal: ProgressGoal
+    var isMyGoal: Bool
     
     var body: some View {
         GoalProgressBarView(
             currentProgress: $goal.currentProgress,
             endProgress: goal.endProgress,
             goalLabel: goal.goalLabel,
-            withStepper: true
+            withStepper: isMyGoal ? true : false
         )
     }
 }
@@ -38,7 +39,7 @@ struct ProgressGoalCardContentView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
             VStack {
-                ProgressGoalCardContentView(goal: $goal)
+                ProgressGoalCardContentView(goal: $goal, isMyGoal: true)
             }
         }
     }

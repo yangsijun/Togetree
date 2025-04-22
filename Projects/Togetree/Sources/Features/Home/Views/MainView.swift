@@ -24,7 +24,7 @@ struct MainView: View {
                         UserProfileInfoView(user: userViewModel.user!, followers: userViewModel.followers, followings: userViewModel.followings)
                             .padding(.horizontal, 20)
                             .padding(.vertical, 10)
-                        GoalListView(user: userViewModel.user!, goalViewModel: goalViewModel)
+                        GoalListView(user: userViewModel.user!, goalViewModel: goalViewModel, isMyGoal: true)
                     }
                 }
             }

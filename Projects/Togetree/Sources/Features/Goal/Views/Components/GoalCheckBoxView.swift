@@ -10,6 +10,7 @@ import SwiftUI
 struct GoalCheckBoxView: View {
     var text: String
     @Binding var isCompleted: Bool
+    var isMyGoal: Bool
     
     var body: some View {
         Group {
@@ -43,7 +44,9 @@ struct GoalCheckBoxView: View {
             )
         }
         .onTapGesture {
-            isCompleted.toggle()
+            if isMyGoal {
+                isCompleted.toggle()                
+            }
         }
     }
 }
@@ -60,8 +63,8 @@ struct GoalCheckBoxView_Previews: PreviewProvider {
     
     static var previews: some View {
         VStack {
-            GoalCheckBoxView(text: subgoal.title, isCompleted: $subgoal.isCompleted)
-            GoalCheckBoxView(text: subgoal_1.title, isCompleted: $subgoal_1.isCompleted)
+            GoalCheckBoxView(text: subgoal.title, isCompleted: $subgoal.isCompleted, isMyGoal: true)
+            GoalCheckBoxView(text: subgoal_1.title, isCompleted: $subgoal_1.isCompleted, isMyGoal: true)
         }
     }
 }

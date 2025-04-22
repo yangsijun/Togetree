@@ -9,9 +9,10 @@ import SwiftUI
 
 struct SingleGoalGoalCardContentView: View {
     @Binding var goal: SingleGoalGoal
+    var isMyGoal: Bool
     
     var body: some View {
-        GoalCheckBoxView(text: goal.title, isCompleted: $goal.isCompleted)
+        GoalCheckBoxView(text: goal.title, isCompleted: $goal.isCompleted, isMyGoal: isMyGoal)
     }
 }
 
@@ -26,7 +27,7 @@ struct SingleGoalGoalCardContentView_Previews: PreviewProvider {
     
     static var previews: some View {
         VStack {
-            SingleGoalGoalCardContentView(goal: $goal)
+            SingleGoalGoalCardContentView(goal: $goal, isMyGoal: true)
         }
     }
 }
