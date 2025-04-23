@@ -17,7 +17,7 @@ struct UserProfileInfoView: View {
             NavigationLink(destination: UserProfileDetailView(user: user)) {
                 UserRowView(user: user, imageSize: 64)
             }
-            NavigationLink(destination: Text("Hello, World!")) {
+            NavigationLink(destination: UserProfileDetailView(user: user, listState: .followers)) {
                 VStack {
                     Text("Followers")
                         .font(.caption)
@@ -26,7 +26,7 @@ struct UserProfileInfoView: View {
                 .padding(8)
             }
             .tint(Color.label)
-            NavigationLink(destination: Text("Hello, World!")) {
+            NavigationLink(destination: UserProfileDetailView(user: user, listState: .followings)) {
                 VStack {
                     Text("Followings")
                         .font(.caption)
