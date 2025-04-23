@@ -19,16 +19,14 @@ struct FollowingHorizontalListView: View {
                 ForEach(userList) { user in
                     FollowingHorziontalItemView(user: user, focusedUser: $focusedUser)
                 }
-                Button(action: {
-                    // TODO: Navigate to FollowAndFollowerView
-                }) {
+                NavigationLink(destination: UserProfileDetailView(user: myUser, listState: .followings)) {
                     Image(systemName: "chevron.forward.circle")
                         .resizable()
                         .scaledToFit()
                         .frame(width: 24, height: 24)
                 }
+                .foregroundStyle(Color.secondaryAccentColor)
                 .padding(.horizontal, 8)
-                .tint(Color.secondaryAccentColor)
             }
             .padding(.vertical, 10)
             .padding(.horizontal, 20)
