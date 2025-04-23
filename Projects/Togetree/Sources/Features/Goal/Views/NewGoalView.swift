@@ -22,7 +22,7 @@ struct NewGoalView: View {
     @State var endDate: Date = Date()
     @State var isPublic: Bool = true
     
-    @Environment(AuthViewModel.self) private var authViewModel
+    @Environment(UserViewModel.self) var myUserViewModel
     
     var isValidForm: Bool {
         switch goalType {
@@ -40,7 +40,7 @@ struct NewGoalView: View {
             if goalType == .singleGoal {
                 try await goalViewModel.createGoal(
                     SingleGoalGoal(
-                        userId: authViewModel.currentUser!.id,
+                        userId: myUserViewModel.user!.id,
                         title: title,
                         description: description,
                         startDate: startDate,
@@ -51,7 +51,7 @@ struct NewGoalView: View {
             } else if goalType == .subGoals {
                 try await goalViewModel.createGoal(
                     SubGoalsGoal(
-                        userId: authViewModel.currentUser!.id,
+                        userId: myUserViewModel.user!.id,
                         title: title,
                         description: description,
                         startDate: startDate,
@@ -63,7 +63,7 @@ struct NewGoalView: View {
             } else if goalType == .progress {
                 try await goalViewModel.createGoal(
                     ProgressGoal(
-                        userId: authViewModel.currentUser!.id,
+                        userId: myUserViewModel.user!.id,
                         title: title,
                         description: description,
                         startDate: startDate,
@@ -117,7 +117,9 @@ struct NewGoalView: View {
 }
 
 struct NewGoalView_Previews: PreviewProvider {
+    static var user = mockUserList[0]
     @State static var goalViewModel = GoalViewModel()
+    @State static var myUserViewModel = UserViewModel()
     @State static var showModal = true
     
     static var previews: some View {
@@ -125,5 +127,13 @@ struct NewGoalView_Previews: PreviewProvider {
             goalViewModel: goalViewModel,
             showModal: $showModal
         )
+        .environment(myUserViewModel)
+        .task {
+            do {
+                try await myUserViewModel.loadUser(with: user.id)
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
     }
 }
