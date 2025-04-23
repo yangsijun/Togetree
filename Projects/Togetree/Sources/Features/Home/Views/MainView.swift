@@ -11,21 +11,34 @@ struct MainView: View {
     @Environment(AuthViewModel.self) var authViewModel
     @Environment(UserViewModel.self) var myUserViewModel
     @Bindable var userViewModel = UserViewModel()
+    @State var userSearchViewModel = UserSearchViewModel()
     @State var goalViewModel = GoalViewModel()
     @State var focusedUser: User?
     @State var showModal: Bool = false
+    @State var searchText: String = ""
     
     var body: some View {
         NavigationStack {
-            ScrollView {
-                VStack(spacing: 0) {
-                    if userViewModel.user != nil {
-                        FollowingHorizontalListView(myUser: myUserViewModel.user!, userList: myUserViewModel.followings, focusedUser: $focusedUser)
-                        UserProfileInfoView(user: userViewModel.user!, followers: userViewModel.followers, followings: userViewModel.followings)
-                            .padding(.horizontal, 20)
-                            .padding(.vertical, 10)
-                        GoalListView(user: userViewModel.user!, goalViewModel: goalViewModel, isMyGoal: true)
+            Group {
+                if searchText.isEmpty {
+                    ScrollView {
+                        VStack(spacing: 8) {
+                            if userViewModel.user != nil {
+                                FollowingHorizontalListView(myUser: myUserViewModel.user!, userList: myUserViewModel.followings, focusedUser: $focusedUser)
+                                UserProfileInfoView(user: userViewModel.user!, followers: userViewModel.followers, followings: userViewModel.followings)
+                                    .padding(.horizontal, 20)
+                                    .padding(.vertical, 10)
+                                GoalListView(user: userViewModel.user!, goalViewModel: goalViewModel, isMyGoal: true)
+                            }
+                        }
                     }
+                } else {
+                    List(userSearchViewModel.userList) { user in
+                        NavigationLink(destination: UserProfileDetailView(user: user)) {
+                            UserRowView(user: user, imageSize: 52)
+                        }
+                    }
+                    .listStyle(.plain)
                 }
             }
             .background(Color.secondaryBackground)
@@ -49,9 +62,8 @@ struct MainView: View {
                     }
                 }
             }
-            // TODO: Implement Search feature
-            .searchable(text: .constant(""))
         }
+        .searchable(text: $searchText, prompt: "Search users")
         .tint(Color.tintColor)
         .task {
             do {
@@ -67,6 +79,19 @@ struct MainView: View {
                     try await userViewModel.loadUser(with: focusedUser!.id)
                 } catch {
                     print(error.localizedDescription)
+                }
+            }
+        }
+        .onChange(of: searchText) {
+            if searchText.isEmpty {
+                userSearchViewModel.userList.removeAll()
+            } else {
+                Task {
+                    do {
+                        try await userSearchViewModel.searchUsers(by: searchText)
+                    } catch {
+                        print(error.localizedDescription)
+                    }
                 }
             }
         }

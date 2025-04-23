@@ -74,4 +74,8 @@ class MockUserService {
             mockFollowingList[followerId] = followingIds
         }
     }
+    
+    func searchUsers(by keyword: String) async throws -> [User] {
+        return mockUserList.filter({ $0.name.contains(keyword) })
+    }
 }
