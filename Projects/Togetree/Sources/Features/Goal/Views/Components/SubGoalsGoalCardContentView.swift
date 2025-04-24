@@ -19,6 +19,7 @@ struct SubGoalsGoalCardContentView: View {
                 currentProgress: .constant(goal.subGoals.filter(\.isCompleted).count),
                 endProgress: goal.subGoals.count
             )
+            .animation(.easeInOut, value: goal.subGoals.filter(\.isCompleted).count)
             VStack(spacing: 10) {
                 if expanded {
                     ForEach($goal.subGoals) { subGoal in

@@ -18,6 +18,7 @@ struct ProgressGoalCardContentView: View {
             goalLabel: goal.goalLabel,
             withStepper: isMyGoal ? true : false
         )
+        .animation(.easeInOut, value: goal.currentProgress)
     }
 }
 
