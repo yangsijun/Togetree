@@ -39,7 +39,9 @@ struct SubGoalsGoalCardContentView: View {
                     HStack {
                         Spacer()
                         Button(action: {
-                            expanded.toggle()
+                            withAnimation {
+                                expanded.toggle()
+                            }
                         }) {
                             HStack(spacing: 4) {
                                 Image(systemName: expanded ? "chevron.up" : "chevron.down")
