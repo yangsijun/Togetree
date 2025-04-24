@@ -21,19 +21,23 @@ struct GoalFormView: View {
     @State var newSubgoalText: String = ""
     
     var body: some View {
-        Form {
-            GoalFormTitleDescriptionView(title: $title, description: $description)
-            GoalFormDetailView(
-                goalType: $goalType,
-                subgoals: $subgoals,
-                endGoal: $endGoal,
-                progressLabel: $progressLabel,
-                startValue: $startValue
-            )
-            GoalFormGoalTypeView(goalType: $goalType)
-            GoalFormDatesView(startDate: $startDate, endDate: $endDate)
-            GoalFormVisibilityView(isPublic: $isPublic)
+        Group {
+            Form {
+                GoalFormTitleDescriptionView(title: $title, description: $description)
+                GoalFormDetailView(
+                    goalType: $goalType,
+                    subgoals: $subgoals,
+                    endGoal: $endGoal,
+                    progressLabel: $progressLabel,
+                    startValue: $startValue
+                )
+                GoalFormGoalTypeView(goalType: $goalType)
+                GoalFormDatesView(startDate: $startDate, endDate: $endDate)
+                GoalFormVisibilityView(isPublic: $isPublic)
+            }
+            .transition(.opacity.combined(with: .move(edge: .top)))
         }
+        .animation(.easeInOut, value: goalType)
         .tint(Color.tintColor)
         .scrollContentBackground(.hidden)
         .background(Color.secondaryBackground)
