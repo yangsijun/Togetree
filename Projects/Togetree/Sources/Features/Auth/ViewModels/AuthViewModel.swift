@@ -12,13 +12,18 @@ import Foundation
 @MainActor
 @Observable class AuthViewModel {
     var isSignedIn: Bool = false
-    var currentUser: User? = mockUserList[0]
+    var currentUser: User?
     var errorMessage: String?
     
 //    private let service: AuthService = AuthService()
     private let service: MockAuthService = MockAuthService()
     
     // TODO: Implement Handle Apple Login
+    
+    init() {
+        MockUserService.loadMockUsersFromCSV(filename: "MockUsers")
+        currentUser = mockUserList.first
+    }
     
     
     func checkSignInStatus() {

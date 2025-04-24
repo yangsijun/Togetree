@@ -13,33 +13,48 @@ struct UserProfileImageView: View {
     var imageSize: CGFloat
     
     var body: some View {
-        Group {
-            Group {
-                if let image = loader.image {
-                    Image(uiImage: image)
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: imageSize, height: imageSize)
-                } else {
-                    Image(systemName: "person.circle.fill")
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: imageSize, height: imageSize)
-                }
-            }
-            .clipShape(Circle())
-            .overlay(Circle().stroke(Color.gray.opacity(0.2), lineWidth: 1))
-            .onAppear {
-                if let url = URL(string: user.profileImageUrl ?? "") {
-                    loader.load(from: url)
-                }
-            }
-            .onChange(of: user) {
-                if let url = URL(string: user.profileImageUrl ?? "") {
-                    loader.load(from: url)
-                }
-            }
+//        Group {
+//            Group {
+//                if let image = loader.image {
+//                    Image(uiImage: image)
+//                        .resizable()
+//                        .scaledToFill()
+//                        .frame(width: imageSize, height: imageSize)
+//                } else {
+//                    Image(systemName: "person.circle.fill")
+//                        .resizable()
+//                        .scaledToFill()
+//                        .foregroundStyle(.gray.opacity(0.3))
+//                        .frame(width: imageSize, height: imageSize)
+//                }
+//            }
+//            .clipShape(Circle())
+//            .overlay(Circle().stroke(Color.gray.opacity(0.2), lineWidth: 1))
+//            .onAppear {
+//                if let url = URL(string: user.profileImageUrl ?? "") {
+//                    loader.load(from: url)
+//                }
+//            }
+//            .onChange(of: user) {
+//                if let url = URL(string: user.profileImageUrl ?? "") {
+//                    loader.load(from: url)
+//                }
+//            }
+//        }
+        AsyncImage(url: URL(string: user.profileImageUrl ?? "")!) { image in
+            image
+                .resizable()
+                .scaledToFill()
+                .frame(width: imageSize, height: imageSize)
+        } placeholder: {
+            Image(systemName: "person.circle.fill")
+                .resizable()
+                .scaledToFill()
+                .foregroundStyle(.gray.opacity(0.3))
+                .frame(width: imageSize, height: imageSize)
         }
+        .clipShape(Circle())
+        .overlay(Circle().stroke(Color.gray.opacity(0.2), lineWidth: 1))
     }
 }
 
